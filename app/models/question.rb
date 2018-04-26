@@ -1,4 +1,4 @@
 class Question < ApplicationRecord
-	has_many :rdae_question
-  	has_many :rda_especific, through: :rdae_question
+	has_many :purpose_question
+  	has_many :purpose, through: :purpose_question
 end

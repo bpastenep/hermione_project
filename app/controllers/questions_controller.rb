@@ -15,6 +15,7 @@ class QuestionsController < ApplicationController
   # GET /questions/new
   def new
     @question = Question.new
+    @proposito = Purpose.all
   end
 
   # GET /questions/1/edit
@@ -25,10 +26,19 @@ class QuestionsController < ApplicationController
   # POST /questions.json
   def create
     @question = Question.new(question_params)
-
+    #De aca en adelante es para lograr insertar datos en la tabla intermedia 
+    #La Tabla intermedia se lla purpose_question
     respond_to do |format|
       if @question.save
-        format.html { redirect_to @question, notice: 'Question was successfully created.' }
+          proposito = Purpose.where(id: params[:question][:proposito]).first
+          proposito_id = proposito.id
+          question = Question.last
+          question_id = question.id
+          puts "AAAAAAAAAAAAH"
+          puts proposito_id
+          puts question_id
+    PurposeQuestion.create(purpose_id: proposito_id, question_id: question_id)
+        format.html { redirect_to @question, notice: 'Pregunta fue exitosamente creada' }
         format.json { render :show, status: :created, location: @question }
       else
         format.html { render :new }
@@ -42,7 +52,7 @@ class QuestionsController < ApplicationController
   def update
     respond_to do |format|
       if @question.update(question_params)
-        format.html { redirect_to @question, notice: 'Question was successfully updated.' }
+        format.html { redirect_to @question, notice: 'Pregunta fue exitosamente actualizada' }
         format.json { render :show, status: :ok, location: @question }
       else
         format.html { render :edit }
@@ -56,7 +66,7 @@ class QuestionsController < ApplicationController
   def destroy
     @question.destroy
     respond_to do |format|
-      format.html { redirect_to questions_url, notice: 'Question was successfully destroyed.' }
+      format.html { redirect_to questions_url, notice: 'Pregunta fue eliminada' }
       format.json { head :no_content }
     end
   end

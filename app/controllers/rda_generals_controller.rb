@@ -27,7 +27,6 @@ class RdaGeneralsController < ApplicationController
     @rda_general = RdaGeneral.new(rda_general_params)
     programa = Program.last
     puts programa.nombre
-    puts "PROBAAANDO"
     @rda_general.program_id = programa.id
     respond_to do |format|
       if @rda_general.save
