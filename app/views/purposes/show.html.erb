@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @purpose.descripcion %>
+</p>
+
+<p>
+  <strong>Rda especific:</strong>
+  <%= @purpose.rda_especific %>
+</p>
+
+<%= link_to 'Edit', edit_purpose_path(@purpose) %> |
+<%= link_to 'Back', purposes_path %>

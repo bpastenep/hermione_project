@@ -1,0 +1,36 @@
+<h1>Nuevo rda Especifico</h1>
+
+<%= form_with(model: @rda_especific, local: true) do |form| %>
+  <% if @rda_especific.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@rda_especific.errors.count, "error") %> prohibited this rda_especific from being saved:</h2>
+
+      <ul>
+      <% @rda_especific.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :descripcion %>
+    <%= form.text_area :descripcion, id: :rda_especific_descripcion %>
+  </div>
+
+  <div class="field">
+    <%= form.label :rda_general_id %>
+    <%= form.select(:rda_general_id) do %>
+        <% @rda_g.each do |c| %>
+          <%= content_tag(:option, c.descripcion, value: c.id) %>
+        <% end %>
+      <% end %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+
+<%= link_to 'Back', rda_especifics_path %>

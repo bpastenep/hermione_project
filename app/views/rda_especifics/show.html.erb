@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @rda_especific.descripcion %>
+</p>
+
+<p>
+  <strong>Rda general:</strong>
+  <%= @rda_especific.rda_general %>
+</p>
+
+<%= link_to 'Edit', edit_rda_especific_path(@rda_especific) %> |
+<%= link_to 'Back', rda_especifics_path %>

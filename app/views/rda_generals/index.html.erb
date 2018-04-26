@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Rda Generals</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Descripcion</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rda_generals.each do |rda_general| %>
+      <tr>
+        <td><%= rda_general.descripcion %></td>
+        <td><%= link_to 'Editar', edit_rda_general_path(rda_general) %></td>
+        <td><%= link_to 'Eliminar', rda_general, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Rda General', new_rda_general_path %>

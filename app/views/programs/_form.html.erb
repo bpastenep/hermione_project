@@ -1,0 +1,51 @@
+<%= form_with(model: program, local: true) do |form| %>
+  <% if program.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(program.errors.count, "error") %> prohibited this program from being saved:</h2>
+
+      <ul>
+      <% program.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :nombre %>
+    <%= form.text_field :nombre, id: :program_nombre %>
+  </div>
+
+
+  <div class="field">
+    <%= form.label :autor %>
+    <%= form.text_field :autor, id: :program_autor %>
+  </div>
+
+  <div class="field">
+    <%= form.label :descripción %>
+    <%= form.text_area :descripcion, id: :program_descripcion %>
+  </div>
+
+  <div class="field">
+    <%= form.label :fecha %>
+    <%= form.date_select :fecha %>
+  </div>
+  <%= program.id%>
+ <div class="field">
+    <%= form.label :Descripcion_rda_general %>
+    <% if program.id.nil? %>
+      <%= form.text_area :desc_rda %>
+    <%else%>
+      <h5><% @desc_rda = RdaGeneral.where(program_id: program.id).first %></h5>
+      <% if @desc_rda.nil? %>
+        <%= form.label :desc_rda, :value => "No posee rda asociado"%>
+      <%else%>
+        <%= form.text_area :desc_rda, :value => @desc_rda.descripcion%>
+      <% end %>
+    <%end%> 
+  </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Tipo pregunta:</strong>
+  <%= @question.tipo_pregunta %>
+</p>
+
+<p>
+  <strong>Enunciado:</strong>
+  <%= @question.enunciado %>
+</p>
+
+<p>
+  <strong>Respuesta:</strong>
+  <%= @question.respuesta %>
+</p>
+
+<p>
+  <strong>Respuestas incor:</strong>
+  <%= @question.respuestas_incor %>
+</p>
+
+<%= link_to 'Edit', edit_question_path(@question) %> |
+<%= link_to 'Back', questions_path %>
