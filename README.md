@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # README
 
 This README would normally document whatever steps are necessary to get the
@@ -22,3 +23,7 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+=======
+# hermione_project
+Proyecto en ruby on rails de apoyo docente de la evaluación en el aula. 
+>>>>>>> bbff7d9d2663e3d883d8c7804ea227c0ff801088
