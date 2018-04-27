@@ -10,7 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180427022126) do
+ActiveRecord::Schema.define(version: 20180427150439) do
+
+  create_table "evaluation_questions", force: :cascade do |t|
+    t.integer "question_id"
+    t.integer "evaluation_id"
+    t.boolean "logrado"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["evaluation_id"], name: "index_evaluation_questions_on_evaluation_id"
+    t.index ["question_id"], name: "index_evaluation_questions_on_question_id"
+  end
+
+  create_table "evaluations", force: :cascade do |t|
+    t.string "objetivo"
+    t.date "fecha"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "programs", force: :cascade do |t|
     t.string "nombre"
