@@ -14,27 +14,28 @@
   <% end %>
 
   <div class="field">
-    <%= form.radio_button(:tipo_pregunta, 1) %>
+    <b><%= form.label :tipo_pregunta %><br></b>
+    <%= form.radio_button(:tipo_pregunta, 1)%>
     <%= form.label(:tipo_pregunta, "Terminos pareados" , id: :question_tipo_pregunta) %>
-	<%= form.radio_button(:tipo_pregunta, 2 , id: :question_tipo_pregunta) %>
-	<%= form.label(:tipo_pregunta, "Alternativas", id: :question_tipo_pregunta) %>
-	<%= form.radio_button(:tipo_pregunta, 3) %>
-	<%= form.label(:tipo_pregunta, "Drag & Drop") %>
+  	<%= form.radio_button(:tipo_pregunta, 2 , id: :question_tipo_pregunta )%>
+  	<%= form.label(:tipo_pregunta, "Alternativas", id: :question_tipo_pregunta) %>
+  	<%= form.radio_button(:tipo_pregunta, 3) %>
+  	<%= form.label(:tipo_pregunta, "Drag & Drop") %>
   </div>
 
   <div class="field">
     <%= form.label :enunciado %>
-    <%= form.text_area :enunciado, id: :question_enunciado %>
+    <%= form.text_area :enunciado, id: :question_enunciado , class: 'form-control'%>
   </div>
 
   <div class="field">
     <%= form.label :respuesta %>
-    <%= form.text_area :respuesta, id: :question_respuesta %>
+    <%= form.text_area :respuesta, id: :question_respuesta , class: 'form-control'%>
   </div>
 
   <div class="field">
     <%= form.label :respuestas_incor %>
-    <%= form.text_area :respuestas_incor, id: :question_respuestas_incor %>
+    <%= form.text_area :respuestas_incor, id: :question_respuestas_incor , class: 'form-control'%>
   </div>
 
     <div class="field">
@@ -42,13 +43,14 @@
     <%= form.select(:proposito) do %>
         <% @proposito.each do |c| %>
           <%= content_tag(:option, c.descripcion, value: c.id) %>
-        <% end %>s
+        <% end %>
       <% end %>
   </div>
 
   <div class="actions">
     <%= form.submit "Crear pregunta" %>
   </div>
+
 <% end %>
 
 

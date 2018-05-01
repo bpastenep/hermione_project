@@ -15,11 +15,11 @@
 
   <div class="field">
     <%= form.label :descripcion %>
-    <%= form.text_area :descripcion, id: :purpose_descripcion %>
+    <%= form.text_area :descripcion, id: :purpose_descripcion , class: 'form-control'%>
   </div>
 
   <div class="field">
-    <%= form.label :rda_especific_id %>
+    <%= form.label :rda_especifico %>
     <%= form.select(:rda_especific_id) do %>
         <% @rda_e.each do |c| %>
           <%= content_tag(:option, c.descripcion, value: c.id) %>

@@ -13,23 +13,23 @@
 
   <div class="field">
     <%= form.label :nombre %>
-    <%= form.text_field :nombre, id: :program_nombre %>
+    <%= form.text_field :nombre, id: :program_nombre , class: 'form-control'%>
   </div>
 
 
   <div class="field">
     <%= form.label :autor %>
-    <%= form.text_field :autor, id: :program_autor %>
+    <%= form.text_field :autor, id: :program_autor , class: 'form-control'%>
   </div>
 
   <div class="field">
     <%= form.label :descripción %>
-    <%= form.text_area :descripcion, id: :program_descripcion %>
+    <%= form.text_area :descripcion, id: :program_descripcion , class: 'form-control'%>
   </div>
 
   <div class="field">
     <%= form.label :fecha %>
-    <%= form.date_select :fecha %>
+    <%= form.date_select :fecha , class: 'form-control'%>
   </div>
   <%= program.id%>
  <div class="field">
@@ -41,7 +41,7 @@
       <% if @desc_rda.nil? %>
         <%= form.label :desc_rda, :value => "No posee rda asociado"%>
       <%else%>
-        <%= form.text_area :desc_rda, :value => @desc_rda.descripcion%>
+        <%= form.text_area :desc_rda, :value => @desc_rda.descripcion , class: 'form-control'%>
       <% end %>
     <%end%> 
   </div>

@@ -15,7 +15,8 @@ class EvaluationsController < ApplicationController
   # GET /evaluations/new
   def new
     @evaluation = Evaluation.new
-  end
+    @question = Question.all
+  end 
 
   # GET /evaluations/1/edit
   def edit
@@ -25,9 +26,16 @@ class EvaluationsController < ApplicationController
   # POST /evaluations.json
   def create
     @evaluation = Evaluation.new(evaluation_params)
-
+     #De aca en adelante es para lograr insertar datos en la tabla intermedia 
+    #La Tabla intermedia se lla evaluation_question
     respond_to do |format|
       if @evaluation.save
+        evaluation = Evaluation.last
+        evaluation_id = evaluation.id
+        question_ids = params[:questions]
+        question_ids.each do |question_id|
+          EvaluationQuestion.create(question_id: question_id, evaluation_id: evaluation_id)
+        end
         format.html { redirect_to @evaluation, notice: 'Evaluation was successfully created.' }
         format.json { render :show, status: :created, location: @evaluation }
       else
