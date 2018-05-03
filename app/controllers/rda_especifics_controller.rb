@@ -56,6 +56,13 @@ class RdaEspecificsController < ApplicationController
   # DELETE /rda_especifics/1
   # DELETE /rda_especifics/1.json
   def destroy
+    #prop = Purpose.where(rda_especific_id: @rda_especific.id)
+    #prop.each do |proposito|
+     # proposito.destroy
+    #end
+    purpose =  @rda_especific.purpose
+
+    puts "AAAAAAAAAAAAAAAAAAAAAAAAH#{purpose}"
     @rda_especific.destroy
     respond_to do |format|
       format.html { redirect_to rda_especifics_url, notice: 'Rda especific was successfully destroyed.' }

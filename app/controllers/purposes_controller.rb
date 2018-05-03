@@ -54,13 +54,16 @@ class PurposesController < ApplicationController
 
   # DELETE /purposes/1
   # DELETE /purposes/1.json
-  def destroy
+ =begin
+ end def destroy
     @purpose.destroy
+
     respond_to do |format|
       format.html { redirect_to purposes_url, notice: 'Purpose was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
+=end
 
   private
     # Use callbacks to share common setup or constraints between actions.

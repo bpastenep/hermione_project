@@ -34,7 +34,6 @@ class QuestionsController < ApplicationController
           proposito_id = proposito.id
           question = Question.last
           question_id = question.id
-          puts "AAAAAAAAAAAAH"
           puts proposito_id
           puts question_id
     PurposeQuestion.create(purpose_id: proposito_id, question_id: question_id)
