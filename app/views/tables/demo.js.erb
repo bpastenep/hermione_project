@@ -1,0 +1,23 @@
+var jtable_config = {
+    title: '',
+    paging: true, //Enable paging
+    pageSize: 10, //Set page size (default: 10)
+    sorting: true, //Enable sorting
+    defaultSorting: 'question_id ASC', //Set default sorting
+    defaultDateFormat: 'yy-mm-dd',
+    gotoPageArea: 'combobox',
+    actions: {
+        listAction: '/demo',
+        deleteAction: '/demo/delete'
+    },
+    fields: {
+        question_id: {
+            key: true,
+            list: false
+        },
+        question_descripcion: {
+            title: 'Descripcion',
+            width: '30%'
+        }
+    }
+};

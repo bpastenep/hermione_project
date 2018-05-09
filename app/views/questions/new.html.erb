@@ -1,57 +1,77 @@
-<h1>Nueva pregunta</h1>
+<div class="container">
+  <h1>Nueva pregunta</h1>
 
-<%= form_with(model: @question, local: true) do |form| %>
-  <% if @question.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:</h2>
+  <%= form_with(model: @question, local: true, html:{ multipart: true }) do |form| %>
+    <% if @question.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:</h2>
 
-      <ul>
-      <% @question.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+        <ul>
+        <% @question.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-  <div class="field">
-    <b><%= form.label :tipo_pregunta %><br></b>
-    <%= form.radio_button(:tipo_pregunta, 1)%>
-    <%= form.label(:tipo_pregunta, "Terminos pareados" , id: :question_tipo_pregunta) %>
-  	<%= form.radio_button(:tipo_pregunta, 2 , id: :question_tipo_pregunta )%>
-  	<%= form.label(:tipo_pregunta, "Alternativas", id: :question_tipo_pregunta) %>
-  	<%= form.radio_button(:tipo_pregunta, 3) %>
-  	<%= form.label(:tipo_pregunta, "Drag & Drop") %>
-  </div>
 
-  <div class="field">
-    <%= form.label :enunciado %>
-    <%= form.text_area :enunciado, id: :question_enunciado , class: 'form-control'%>
-  </div>
-
-  <div class="field">
-    <%= form.label :respuesta %>
-    <%= form.text_area :respuesta, id: :question_respuesta , class: 'form-control'%>
-  </div>
-
-  <div class="field">
-    <%= form.label :respuestas_incor %>
-    <%= form.text_area :respuestas_incor, id: :question_respuestas_incor , class: 'form-control'%>
-  </div>
 
     <div class="field">
-    <%= form.label :proposito %>
-    <%= form.select(:proposito) do %>
-        <% @proposito.each do |c| %>
-          <%= content_tag(:option, c.descripcion, value: c.id) %>
+      <b><%= form.label :tipo_pregunta %><br></b>
+      <%= form.radio_button(:tipo_pregunta, 1)%>
+      <%= form.label(:tipo_pregunta, "Terminos pareados" , id: :question_tipo_pregunta) %>
+    	<%= form.radio_button(:tipo_pregunta, 2 , id: :question_tipo_pregunta )%>
+    	<%= form.label(:tipo_pregunta, "Alternativas", id: :question_tipo_pregunta) %>
+    	<%= form.radio_button(:tipo_pregunta, 3) %>
+    	<%= form.label(:tipo_pregunta, "Drag & Drop") %>
+    </div>
+
+    <div class="field">
+      <b> <%= form.label :enunciado %></b>
+      <%= form.text_area :enunciado, id: :question_enunciado , class: 'form-control'%>
+    </div>
+
+    <div class=field>
+     <%= form.label(:subir_imagen) %>
+     <%= form.file_field :imagen %> <br/>
+    </div>
+
+    <div class="field">
+      <b><%= form.label :respuesta %></b>
+      <%= form.text_area :respuesta, id: :question_respuesta , class: 'form-control'%>
+    </div>
+
+    <div class="field">
+      <b><%= form.label :respuesta_incorrecta %></b>
+      <%= form.text_area :respuestas_incor, id: :question_respuestas_incor , class: 'form-control'%>
+    </div>
+
+        <div class="field">
+      <b><%= form.label :respuesta_incorrecta %></b>
+      <%= form.text_area :respuesta_incorrecta2, id: :question_respuesta_incorrecta2 , class: 'form-control'%>
+    </div>
+
+
+      <div class="field">
+      <b><%= form.label :respuesta_incorrecta %></b>
+      <%= form.text_area :respuesta_incorrecta3, id: :question_respuesta_incorrecta2 , class: 'form-control'%>
+    </div>
+
+      <div class="field">
+      <b><%= form.label :proposito %><br></b>
+      <%= form.select(:proposito) do %>
+          <% @proposito.each do |c| %>
+            <%= content_tag(:option, c.descripcion, value: c.id) %>
+          <% end %>
         <% end %>
-      <% end %>
-  </div>
+    </div>
 
-  <div class="actions">
-    <%= form.submit "Crear pregunta" %>
-  </div>
+    <div class="actions">
+      <%= form.submit "Crear pregunta", class: "btn btn-primary"  %>
+    </div>
 
-<% end %>
+  <% end %>
 
 
-<%= link_to 'Volver', questions_path %>
+  <%= link_to 'Volver', questions_path %>
+</div>

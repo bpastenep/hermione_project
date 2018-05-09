@@ -27,10 +27,9 @@ class ProgramsController < ApplicationController
   # POST /programs.json
   def create
     @program = Program.new(program_params)
-
     respond_to do |format|
       if @program.save
-        format.html { redirect_to new_rda_general_path, notice: 'Program was successfully created.' }
+        format.html { redirect_to new_rda_general_path, notice: 'Programa fue exitosamente creado' }
         format.json { render :show, status: :created, location: @program }
         #Para agregar resultado de aprendizaje general 
         programa = Program.last

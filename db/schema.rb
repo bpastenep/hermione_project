@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180427150439) do
+ActiveRecord::Schema.define(version: 20180509033934) do
 
   create_table "evaluation_questions", force: :cascade do |t|
     t.integer "question_id"
@@ -62,6 +62,16 @@ ActiveRecord::Schema.define(version: 20180427150439) do
     t.text "respuestas_incor"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "respuesta_incorrecta2"
+    t.string "respuesta_incorrecta3"
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
+    t.string "imagen_file_name"
+    t.string "imagen_content_type"
+    t.integer "imagen_file_size"
+    t.datetime "imagen_updated_at"
   end
 
   create_table "rda_especifics", force: :cascade do |t|

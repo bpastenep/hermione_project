@@ -1,29 +1,31 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <p id="notice"><%= notice %></p>
 
-<h1>Purposes</h1>
+  <h1>Propósitos</h1>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Descripcion</th>
-      <th>Rda específicos</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @purposes.each do |purpose| %>
+  <table class="table table-striped">
+    <thead>
       <tr>
-        <td><%= purpose.descripcion %></td>
-        <td><%= purpose.rda_especific.descripcion %></td>
-        <td><%= link_to 'Show', purpose %></td>
-        <td><%= link_to 'Edit', edit_purpose_path(purpose) %></td>
-        <td><%= link_to 'Destroy', purpose, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Descripción</th>
+        <th>Rda específicos</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @purposes.each do |purpose| %>
+        <tr>
+          <td><%= purpose.descripcion %></td>
+          <td><%= purpose.rda_especific.descripcion %></td>
+          <td><%= link_to 'Mostrar', purpose %></td>
+          <td><%= link_to 'Editar', edit_purpose_path(purpose) %></td>
+          <td><%= link_to 'Eliminar', purpose, method: :delete, data: { confirm: '¿Está seguro?, la acción es completamente irreversibles. Borrando todas las preguntas que dependan de este propósito' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<%= link_to 'New Purpose', new_purpose_path %>
+  <br>
+
+  <%= link_to 'Nuevo propósito', new_purpose_path %>
+</div>

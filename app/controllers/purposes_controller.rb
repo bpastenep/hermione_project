@@ -54,8 +54,8 @@ class PurposesController < ApplicationController
 
   # DELETE /purposes/1
   # DELETE /purposes/1.json
- =begin
- end def destroy
+   
+ def destroy
     @purpose.destroy
 
     respond_to do |format|
@@ -63,7 +63,7 @@ class PurposesController < ApplicationController
       format.json { head :no_content }
     end
   end
-=end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

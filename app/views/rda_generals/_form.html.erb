@@ -1,22 +1,25 @@
-<%= form_with(model: rda_general, local: true) do |form| %>
-  <% if rda_general.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(rda_general.errors.count, "error") %> prohibited this rda_general from being saved:</h2>
+<div class="container">
+  <%= form_with(model: rda_general, local: true) do |form| %>
+    <% if rda_general.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(rda_general.errors.count, "error") %> prohibited this rda_general from being saved:</h2>
 
-      <ul>
-      <% rda_general.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <ul>
+        <% rda_general.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= form.label :descripción %>
+      <%= form.text_field :descripcion, id: :rda_general_descripcion , class: 'form-control' %>
     </div>
+        <br>
+    <div class="actions">
+      <%= form.submit  class: "btn btn-primary" %>
+    </div>
+
   <% end %>
-
-  <div class="field">
-    <%= form.label :descripcion %>
-    <%= form.text_field :descripcion, id: :rda_general_descripcion %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

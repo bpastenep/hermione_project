@@ -12,8 +12,8 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :descripcion %>
-    <%= form.text_area :descripcion, id: :rda_especific_descripcion %>
+    <%= form.label :descripción %>
+    <%= form.text_area :descripcion, id: :rda_especific_descripcion  , class: 'form-control'%>
   </div>
   
 <div class="field">
@@ -26,6 +26,6 @@
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit  class: "btn btn-primary" %>
   </div>
 <% end %>

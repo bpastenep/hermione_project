@@ -1,25 +1,29 @@
-<p id="notice"><%= notice %></p>
+<div class="container"><center>
 
-<p>
-  <strong>Nombre:</strong>
-  <%= @program.nombre %>
-</p>
+	<p id="notice"><%= notice %></p>
+
+	<p>
+	  <strong>Nombre:</strong>
+	  <%= @program.nombre %>
+	</p>
 
 
-<p>
-  <strong>Autor:</strong>
-  <%= @program.autor %>
-</p>
+	<p>
+	  <strong>Autor:</strong>
+	  <%= @program.autor %>
+	</p>
 
-<p>
-  <strong>Descripcion:</strong>
-  <%= @program.descripcion %>
-</p>
+	<p>
+	  <strong>Descripcion:</strong>
+	  <%= @program.descripcion %>
+	</p>
 
-<p>
-  <strong>Fecha:</strong>
-  <%= @program.fecha %>
-</p>
+	<p>
+	  <strong>Fecha:</strong>
+	  <%= @program.fecha %>
+	</p>
 
-<%= link_to 'Edit', edit_program_path(@program) %> |
-<%= link_to 'Back', programs_path %>
+	<%= link_to 'Edit', edit_program_path(@program) %> |
+	<%= link_to 'Back', programs_path %>
+
+</div></center>
