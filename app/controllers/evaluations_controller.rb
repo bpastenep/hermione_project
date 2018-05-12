@@ -69,6 +69,15 @@ class EvaluationsController < ApplicationController
     end
   end
 
+  def active
+    @evaluation = Evaluation.all
+  end
+
+  def activequestion
+    puts "AAAAAA"
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_evaluation
