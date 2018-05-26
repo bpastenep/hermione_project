@@ -10,13 +10,13 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require rails-ujs
-//= require turbolinks
-//= require_tree .
 //= require jquery3
+//= require jquery
+//= require rails-ujs
+//= require_tree .
 //= require popper
 //= require bootstrap-sprockets
-
+//= require turbolinks
 
 (function ($) {
     jQuery.fn.jtable_ou = function () {

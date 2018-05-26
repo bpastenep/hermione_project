@@ -75,6 +75,27 @@ class QuestionsController < ApplicationController
     puts "entre a quiz"
   end
 
+  def searchQuestionsActive
+    active = EvaluationQuestion.where(logrado: true)
+    if active.nil?
+      @resultado = nil
+      puts "No existen preguntas activas"
+    else
+      respuestas = Array.new(4)
+      active.each do |pregunta|
+        idPregunta = pregunta.question_id
+        @resultado = Question.find(idPregunta)
+      respuestas[0]=@resultado.respuesta
+      respuestas[1]=@resultado.respuestas_incor
+      respuestas[2]=@resultado.respuesta_incorrecta2
+      respuestas[3]=@resultado.respuesta_incorrecta3
+      @respuestasD = respuestas.shuffle 
+      end
+    end
+
+
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_question

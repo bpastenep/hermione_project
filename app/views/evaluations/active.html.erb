@@ -1,16 +1,12 @@
 
 <div class="container">
-	<%= form_with url: activequestion_path do |form| %>
+	<%= form_tag activequestion_url do |form| %>
 		<h1>Activación de evaluación</h1>
 		<p>Seleccione la evaluación a activar</p>
 		    <div class="field">
-		      <%= form.select(:evaluation_id) do %>
-		          <% @evaluation.each do |c| %>
-		            <%= content_tag(:option, c.objetivo, value: c.id , class: 'form-control') %>
-		            <%end %>
-          	  <% end %>
+		      <%= select_tag "evaluation_id", options_from_collection_for_select(@evaluation, "id", "objetivo") %>
           	  <br>
           	 </div>
-  		<%= form.submit "Activar evaluación"%>
+  		<%= submit_tag "Activar evaluación", class: 'btn btn-primaty'%>
   	<% end %>
 </div>

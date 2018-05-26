@@ -1,0 +1,43 @@
+<div class="container">
+<%if @resultado.nil?%>
+	<p> NO existen preguntas activas </p>
+<%else%>
+	<p align=center><%=@resultado.enunciado%></p>
+	<table class="table" align="center">
+		<tbody>
+			<th>
+				<td>
+					<input type="radio" name="opcionA" value="A">A<br>
+				</td>
+				<td>
+					<p> <%= @respuestasD[0] %></p>
+				</td>
+			</th>
+			<th>
+				<td>
+					<input type="radio" name="opcionB" value="B">B<br>
+				</td>
+				<td>
+					<p> <%=@respuestasD[1]%> </p>
+				</td>
+			</th>
+			<th>
+				<td>
+					<input type="radio" name="opcionC" value="C">C<br>
+				</td>
+				<td>
+					<p> <%=@respuestasD[2]%> </p>
+				</td>
+			</th>
+			<th>
+				<td>
+					<input type="radio" name="opcionD" value="D">D<br>
+				</td>
+				<td>
+					<p> <%=@respuestasD[3]%> </p>
+				</td>
+			</th>
+		</tbody>
+	</table>
+<%end%>
+</div>

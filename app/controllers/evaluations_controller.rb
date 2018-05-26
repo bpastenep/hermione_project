@@ -1,6 +1,8 @@
 class EvaluationsController < ApplicationController
   before_action :set_evaluation, only: [:show, :edit, :update, :destroy]
 
+  respond_to :html, :js
+
   # GET /evaluations
   # GET /evaluations.json
   def index
@@ -74,7 +76,42 @@ class EvaluationsController < ApplicationController
   end
 
   def activequestion
-    puts "AAAAAA"
+    @idEvaluation= params[:evaluation_id]
+    evaluation = Evaluation.where(id: @idEvaluation).first
+    @questions = evaluation.question
+    @questions.each do |question|
+      puts question.enunciado
+    end
+  end
+
+  #Función encargada de la creación de grupos una vez finalizada una pregunta. 
+  def creargrupos
+    
+  end
+
+  #Funcion que permite modficar el estado de una pregunta en la tabla evaluation_question. Cambiando el booleano
+  #que existe por cada asociación. 
+  def activarpregunta
+    puts "entre a activarpregunta"
+    idEvaluacion =  params[:idEvaluation]
+    idPregunta = params[:idPregunta]
+    preguntaAActivar = EvaluationQuestion.where(evaluation_id: idEvaluacion).where(question_id: idPregunta)
+    if preguntaAActivar.update(logrado: true)
+      puts "Pregunta activada"
+    else
+      puts "No se pudo activar la pregunta"
+    end
+  end
+
+  def desactivarpregunta
+    idEvaluacion =  params[:idEvaluation]
+    idPregunta = params[:idPregunta]
+    preguntaAActivar = EvaluationQuestion.where(evaluation_id: idEvaluacion).where(question_id: idPregunta)
+    if preguntaAActivar.update(logrado: false)
+      puts "Pregunta desactivada"
+    else
+      puts "No se pudo desactivar la pregunta"
+    end
   end
 
 

@@ -11,6 +11,11 @@ Rails.application.routes.draw do
   get 'active' => 'evaluations#active', as: :active
   post 'quiz'	=> 'questions#quiz', as: :quiz
   post 'activequestion' => 'evaluations#activequestion', as: :activequestion
+  post 'crearGrupos' => 'evaluations#crearGrupos', as: :creargrupos
+  post 'activarpregunta' => 'evaluations#activarpregunta', as: :activarpregunta
+  post 'desactivarpregunta' => 'evaluations#desactivarpregunta', as: :desactivarpregunta
+  get 'searchQuestionActive' => 'questions#searchQuestionsActive', as: :searchQuestionsActive
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
+ 
