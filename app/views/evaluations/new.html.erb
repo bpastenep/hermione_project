@@ -1,53 +1,58 @@
+  <center>
+
+  <% if user_signed_in? %>
+  <%if current_user.rol=="Profesor"%>
 
 
-<center>
+  <h1>Nueva evaluación</h1>
+  <%= form_with(model: @evaluation, local: true) do |form| %>
+    <% if @evaluation.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@evaluation.errors.count, "error") %> prohibited this evaluation from being saved:</h2>
 
-<h1>Nueva evaluación</h1>
-<%= form_with(model: @evaluation, local: true) do |form| %>
-  <% if @evaluation.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@evaluation.errors.count, "error") %> prohibited this evaluation from being saved:</h2>
-
-      <ul>
-      <% @evaluation.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <ul>
+        <% @evaluation.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <table>
+    <tr>
+   
+    <div class="field">
+      <td><%= form.label :objetivo %></td>
+      <td><%= form.text_area :objetivo, id: :evaluation_objetivo, class: 'form-control'%></td>
     </div>
-  <% end %>
-  <table>
-  <tr>
- 
-  <div class="field">
-    <td><%= form.label :objetivo %></td>
-    <td><%= form.text_area :objetivo, id: :evaluation_objetivo, class: 'form-control'%></td>
-  </div>
-  </tr>
-  <tr>
-  <div class="field">
-    <td><%= form.label :fecha %></td>
-    <td><%= form.date_select :fecha, id: :evaluation_fecha , class: 'form-control' %></td>
-  </div>
-  </tr>
-  
-  <div class="field">
-  <tr>
-  <td>
-   <p>Seleccione las preguntas </p> 
+    </tr>
+    <tr>
+    <div class="field">
+      <td><%= form.label :fecha %></td>
+      <td><%= form.date_select :fecha, id: :evaluation_fecha , class: 'form-control' %></td>
+    </div>
+    </tr>
+    
+    <div class="field">
+    <tr>
     <td>
-      <% @question.each do |c| %>
-          <%= check_box_tag "questions[]", c.id %>
-          <%= label_tag(:questions, c.enunciado) %><br>
-      <%end%>
-    </td>
-    </td>
-  </tr>
-  </div>
-  </table>
+     <p>Seleccione las preguntas </p> 
+      <td>
+        <% @question.each do |c| %>
+            <%= check_box_tag "questions[]", c.id %>
+            <%= label_tag(:questions, c.enunciado) %><br>
+        <%end%>
+      </td>
+      </td>
+    </tr>
+    </div>
+    </table>
 
-  <div class="actions">
-    <%= form.submit "Crear evaluación" , class: "btn btn-primary"  %>
-  </div>
-<% end %>
-<%= link_to 'Volver', evaluations_path %>
-</center>
+    <div class="actions">
+      <%= form.submit "Crear evaluación" , class: "btn btn-primary"  %>
+    </div>
+  <%else%>
+  <h1><center>No tiene los permisos necesarios.</center></h1>
+  <%end%>
+<%else%>
+  <h1>Debe iniciar sesión</h1>
+<%end%>

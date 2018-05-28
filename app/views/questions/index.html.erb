@@ -1,3 +1,6 @@
+<% if user_signed_in? %>
+  <%if current_user.rol=="Profesor"%>
+
 <div class="container">
   <p id="notice"><%= notice %></p>
 
@@ -35,3 +38,9 @@
 
 <%= link_to 'Nueva pregunta', new_question_path %>
 </div>
+  <%else%>
+  <h1><center>No tiene los permisos necesarios.</center></h1>
+  <%end%>
+<%else%>
+  <h1>Debe iniciar sesión</h1>
+<%end%>

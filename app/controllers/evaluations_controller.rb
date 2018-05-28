@@ -92,9 +92,11 @@ class EvaluationsController < ApplicationController
   #Funcion que permite modficar el estado de una pregunta en la tabla evaluation_question. Cambiando el booleano
   #que existe por cada asociación. 
   def activarpregunta
-    puts "entre a activarpregunta"
     idEvaluacion =  params[:idEvaluation]
     idPregunta = params[:idPregunta]
+    puts "idEvaluacion#{idEvaluacion} idPregunta#{idPregunta}"
+    tmp = Tmp.last
+    tmp.update(evaluationActive_id: idEvaluacion, flagAlternativas: true)
     preguntaAActivar = EvaluationQuestion.where(evaluation_id: idEvaluacion).where(question_id: idPregunta)
     if preguntaAActivar.update(logrado: true)
       puts "Pregunta activada"
@@ -107,6 +109,8 @@ class EvaluationsController < ApplicationController
     idEvaluacion =  params[:idEvaluation]
     idPregunta = params[:idPregunta]
     preguntaAActivar = EvaluationQuestion.where(evaluation_id: idEvaluacion).where(question_id: idPregunta)
+     tmp = Tmp.last
+    tmp.update(flagAlternativas: false)
     if preguntaAActivar.update(logrado: false)
       puts "Pregunta desactivada"
     else

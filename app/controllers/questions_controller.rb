@@ -82,16 +82,38 @@ class QuestionsController < ApplicationController
       puts "No existen preguntas activas"
     else
       respuestas = Array.new(4)
+      @respuestasD = Array.new(4)
+      tmp = Tmp.last
       active.each do |pregunta|
+        puts "ENTREE"
         idPregunta = pregunta.question_id
+        puts "AAAAAAAAAAA#{idPregunta}"
         @resultado = Question.find(idPregunta)
+        if @resultado.nil?
+          puts "no encontré preguntas con ese id"
+        else
+        puts "BBBBBBBBBBBBBBB #{@resultado}"
+      end 
       respuestas[0]=@resultado.respuesta
       respuestas[1]=@resultado.respuestas_incor
       respuestas[2]=@resultado.respuesta_incorrecta2
       respuestas[3]=@resultado.respuesta_incorrecta3
-      @respuestasD = respuestas.shuffle 
+      if tmp.flagAlternativas
+        puts "AAAAAAAAAAAAAAAAAH"
+        @respuestasD = respuestas.shuffle
+        puts @respuestasD[0]
+        puts @respuestasD[1]
+        puts @respuestasD[2]
+        puts @respuestasD[3]
+        tmp.update(a: @respuestasD[0], b: @respuestasD[1], c: @respuestasD[2], d: @respuestasD[3], flagAlternativas: false) 
+      else
+        @respuestasD[0]= tmp.a
+        @respuestasD[1]= tmp.b
+        @respuestasD[2]= tmp.c
+        @respuestasD[3]= tmp.a
       end
     end
+  end
 
 
   end

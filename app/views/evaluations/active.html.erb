@@ -1,12 +1,21 @@
+<% if user_signed_in? %>
+  <%if current_user.rol=="Profesor"%>
 
-<div class="container">
-	<%= form_tag activequestion_url do |form| %>
-		<h1>Activación de evaluación</h1>
-		<p>Seleccione la evaluación a activar</p>
-		    <div class="field">
-		      <%= select_tag "evaluation_id", options_from_collection_for_select(@evaluation, "id", "objetivo") %>
-          	  <br>
-          	 </div>
-  		<%= submit_tag "Activar evaluación", class: 'btn btn-primaty'%>
-  	<% end %>
-</div>
+
+	<div class="container">
+		<%= form_tag activequestion_url do |form| %>
+			<h1>Activación de evaluación</h1>
+			<p>Seleccione la evaluación a activar</p>
+			    <div class="field">
+			      <%= select_tag "evaluation_id", options_from_collection_for_select(@evaluation, "id", "objetivo") %>
+	          	  <br>
+	          	 </div>
+	  		<%= submit_tag "Activar evaluación", class: 'btn btn-primaty'%>
+	  	<% end %>
+	</div>
+	  <%else%>
+  <h1><center>No tiene los permisos necesarios.</center></h1>
+  <%end%>
+<%else%>
+  <h1>Debe iniciar sesión</h1>
+<%end%>

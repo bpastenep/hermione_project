@@ -23,7 +23,16 @@
     
   </head>
   <body>
-   	
+<% if user_signed_in? %>
+<%if current_user.rol=="Profesor"%>
+<div class="container">
+      <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+      <% end %>
+      <%= yield %>
+      <%= render 'layouts/footer' %>
+      <%= debug(params) if Rails.env.development? %>
+</div>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#">Hermione</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,7 +72,8 @@
           <a class="dropdown-item" href=/evaluations>Mostrar evaluaciones</a>
         </div>
       </li>
-
+      <%end%>
+      <%if current_user.rol=="Alumno"%>
        <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Responder
@@ -72,20 +82,24 @@
           <a class="dropdown-item" href=/searchQuestionActive>Visualizar preguntas</a>
         </div>
       </li>
+      <%end%>
     </ul>
   </div>
 </nav>
 
+<%end%>
+
  <%= csrf_meta_tags %>
                   <p class="navbar-text pull-right">
               <% if user_signed_in? %>
-                  Logged in as <strong><%= current_user.email %></strong>.
+                  Sesión iniciada como <strong><%= current_user.nombreC %></strong>.
                 <%= link_to 'Editar perfil', edit_user_registration_path, :class => 'navbar-link' %> |
                 <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
               <% else %>
                 <%= link_to "Registrarse", new_user_registration_path, :class => 'navbar-link'  %> |
                 <%= link_to "Iniciar sesión", new_user_session_path, :class => 'navbar-link'  %>
-                <% end %> 
+              <% end %> 
+            
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -96,6 +110,10 @@
 
     <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
  	<br>
-  <%= yield %>
+    <%= yield %>
+
+
+
+
   </body>
 </html>

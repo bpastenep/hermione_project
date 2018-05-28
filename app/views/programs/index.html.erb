@@ -1,44 +1,55 @@
-<p id="notice"><%= notice %></p>
 
-<div class="container">
-  <h1>Programas</h1>
+  <% if user_signed_in? %>
+  <p id="notice"><%= notice %></p>
 
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Nombre</th>
-        <th>Autor</th>
-        <th>Descripcion</th>
-        <th>Fecha</th>
-        <th>RDA</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
+  <%if current_user.rol=="Profesor"%>
 
-    <tbody>
-      <% @programs.each do |program| %>
+
+  <div class="container">
+    <h1>Programas</h1>
+
+    <table class="table table-striped">
+      <thead>
         <tr>
-          <td><%= program.nombre %></td>
-          <td><%= program.autor %></td>
-          <td><%= program.descripcion %></td>
-          <td><%= program.fecha %></td>
-          <td>
-          <%@rdaNombre = "No posee RDA asociado"%>
-          <% @rdag.each do |rda| %>
-            <%if rda.program_id == program.id %>
-              <%@rdaNombre = rda.descripcion%>
-            <% end %>
-          <% end %>
-          <%=@rdaNombre%>
-          </td>
-          <td><%= link_to 'Editar', edit_program_path(program) %></td>
-          <td><%= link_to 'Eliminar', program, method: :delete, data: { confirm: 'Está seguro?' } %></td>
+          <th>Nombre</th>
+          <th>Autor</th>
+          <th>Descripcion</th>
+          <th>Fecha</th>
+          <th>RDA</th>
+          <th colspan="3"></th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
 
-  <br>
+      <tbody>
+        <% @programs.each do |program| %>
+          <tr>
+            <td><%= program.nombre %></td>
+            <td><%= program.autor %></td>
+            <td><%= program.descripcion %></td>
+            <td><%= program.fecha %></td>
+            <td>
+            <%@rdaNombre = "No posee RDA asociado"%>
+            <% @rdag.each do |rda| %>
+              <%if rda.program_id == program.id %>
+                <%@rdaNombre = rda.descripcion%>
+              <% end %>
+            <% end %>
+            <%=@rdaNombre%>
+            </td>
+            <td><%= link_to 'Editar', edit_program_path(program) %></td>
+            <td><%= link_to 'Eliminar', program, method: :delete, data: { confirm: 'Está seguro?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 
-<%= link_to 'Agregar un programa', new_program_path %>
-</div>
+    <br>
+
+  <%= link_to 'Agregar un programa', new_program_path %>
+  </div>
+  <%else%>
+  <h1><center>No posee los permisos necesarios</center></h1>
+  <%end%>
+<%else%>
+<h1><center>Debe iniciar sesión</center></h1>
+<%end%>

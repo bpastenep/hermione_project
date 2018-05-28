@@ -1,53 +1,59 @@
+<% if user_signed_in? %>
+  <%if current_user.rol=="Profesor"%>
+	<div class="container">
+		<h1> Activar preguntas </h1>
 
-
-<div class="container">
-	<h1> Activar preguntas </h1>
-
-	<table class="table table-striped">
-		<thead>
-			<tr>
-				<td><b>Enunciado pregunta</b></td>
-				<td></td>
-				<td></td>
-			</tr>
-		</thead>
-		<tbody>
-		<% @questions.each do |question| %>
-				<tr >
-					<td><%= question.enunciado %></td>
-					<td id= '<%= question.id%>'><%= button_to "Activar pregunta", "#", class: "activeQuestion", remote: true %> </td>	
-					<td id= '<%= question.id%>'><%= button_to "Desactivar pregunta", "#", class: "desactiveQuestion", remote: true %> </td>	
-					<td> <%= button_to 'Crear grupos', active_path %></td>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<td><b>Enunciado pregunta</b></td>
+					<td></td>
+					<td></td>
 				</tr>
-		<%end%>		
-		</tbody>
-	</table>
-</div>
+			</thead>
+			<tbody>
+			<% @questions.each do |question| %>
+					<tr >
+						<td><%= question.enunciado %></td>
+						<td id= '<%= question.id%>'><%= button_to "Activar pregunta", "#", class: "activeQuestion", remote: true %> </td>	
+						<td id= '<%= question.id%>'><%= button_to "Desactivar pregunta", "#", class: "desactiveQuestion", remote: true %> </td>	
+						<td> <%= button_to 'Crear grupos', active_path %></td>
+					</tr>
+			<%end%>		
+			</tbody>
+		</table>
+	</div>
 
 
-<script type="text/javascript">
+	<script type="text/javascript">
 
 
-$(".activeQuestion").click(function(){
-	console.log("ENTRE A ACTIVAR EN JSON.")
-	$.ajax({
-		type: 'POST',
-		url: "<%= activarpregunta_path %>",
-		data: {idEvaluation: "<%= @idEvaluation%>", idPregunta: this.parentElement.parentNode.attributes.id.value },
-		dataType: 'json',
-		success: {status: "ok"}
+	$(".activeQuestion").click(function(){
+		console.log("ENTRE A ACTIVAR EN JSON.")
+		$.ajax({
+			type: 'POST',
+			url: "<%= activarpregunta_path %>",
+			data: {idEvaluation: "<%= @idEvaluation%>", idPregunta: this.parentElement.parentNode.attributes.id.value },
+			dataType: 'json',
+			success: {status: "ok"}
+		});
 	});
-});
 
 
-$(".desactiveQuestion").click(function(){
-	console.log("Entre a desactivar");
-	$.ajax({
-		type: 'POST',
-		url: "<%= desactivarpregunta_path %>",
-		data: {idEvaluation: "<%= @idEvaluation%>", idPregunta: this.parentElement.parentNode.attributes.id.value },
-		dataType: 'json',
-		success: {status: "ok"}
+	$(".desactiveQuestion").click(function(){
+		console.log("Entre a desactivar");
+		$.ajax({
+			type: 'POST',
+			url: "<%= desactivarpregunta_path %>",
+			data: {idEvaluation: "<%= @idEvaluation%>", idPregunta: this.parentElement.parentNode.attributes.id.value },
+			dataType: 'json',
+			success: {status: "ok"}
+		});
 	});
-});
-</script>
+	</script>
+ <%else%>
+ <h1><center>No tiene los permisos necesarios.</center></h1>
+  <%end%>
+<%else%>
+  <h1>Debe iniciar sesión</h1>
+<%end%>

@@ -1,9 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  run: MyString
-  nombre: MyString
+  descripcion: MyString
 
 two:
-  run: MyString
-  nombre: MyString
+  descripcion: MyString

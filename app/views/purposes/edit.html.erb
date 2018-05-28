@@ -1,6 +1,17 @@
-<h1>Editing Purpose</h1>
+<% if user_signed_in? %>
+  <%if current_user.rol=="Profesor"%>
 
-<%= render 'form', purpose: @purpose %>
 
-<%= link_to 'Show', @purpose %> |
-<%= link_to 'Back', purposes_path %>
+
+	<h1>Editando propósitos</h1>
+
+	<%= render 'form', purpose: @purpose %>
+
+	<%= link_to 'Show', @purpose %> |
+	<%= link_to 'Back', purposes_path %>
+  <%else%>
+  <h1><center>No tiene los permisos necesarios.</center></h1>
+  <%end%>
+<%else%>
+  <h1>Debe iniciar sesión</h1>
+<%end%>

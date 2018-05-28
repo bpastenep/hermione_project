@@ -1,29 +1,38 @@
-<div class="container"><center>
+<% if user_signed_in? %>
+  <%if current_user.rol=="Profesor"%>
 
-	<p id="notice"><%= notice %></p>
+	<div class="container"><center>
 
-	<p>
-	  <strong>Nombre:</strong>
-	  <%= @program.nombre %>
-	</p>
+		<p id="notice"><%= notice %></p>
+
+		<p>
+		  <strong>Nombre:</strong>
+		  <%= @program.nombre %>
+		</p>
 
 
-	<p>
-	  <strong>Autor:</strong>
-	  <%= @program.autor %>
-	</p>
+		<p>
+		  <strong>Autor:</strong>
+		  <%= @program.autor %>
+		</p>
 
-	<p>
-	  <strong>Descripcion:</strong>
-	  <%= @program.descripcion %>
-	</p>
+		<p>
+		  <strong>Descripcion:</strong>
+		  <%= @program.descripcion %>
+		</p>
 
-	<p>
-	  <strong>Fecha:</strong>
-	  <%= @program.fecha %>
-	</p>
+		<p>
+		  <strong>Fecha:</strong>
+		  <%= @program.fecha %>
+		</p>
 
-	<%= link_to 'Edit', edit_program_path(@program) %> |
-	<%= link_to 'Back', programs_path %>
+		<%= link_to 'Edit', edit_program_path(@program) %> |
+		<%= link_to 'Back', programs_path %>
 
-</div></center>
+	</div></center>
+  <%else%>
+  <h1><center>No tiene los permisos necesarios.</center></h1>
+  <%end%>
+<%else%>
+  <h1>Debe iniciar sesión</h1>
+<%end%>

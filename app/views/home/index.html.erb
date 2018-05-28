@@ -1,1 +1,5 @@
-<center><%= link_to "Iniciar sesión", new_user_session_path, :class => 'navbar-link'  %> </center>s 
+<%if user_signed_in? %>
+	<h1> <center>Bienvenido al proyecto Hermione </h1></center>
+<%else%>
+	<center><%= link_to "Iniciar sesión", new_user_session_path, :class => 'navbar-link'  %> </center>
+<%end%>

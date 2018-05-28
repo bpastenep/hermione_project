@@ -10,7 +10,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180524210920) do
+ActiveRecord::Schema.define(version: 20180528032141) do
+
+  create_table "answers", force: :cascade do |t|
+    t.integer "question_id"
+    t.integer "evaluation_id"
+    t.integer "user_id"
+    t.string "answer"
+    t.boolean "correct"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "alternativa"
+    t.index ["question_id"], name: "index_answers_on_question_id"
+  end
+
+  create_table "course_evaluations", force: :cascade do |t|
+    t.integer "course_id"
+    t.integer "evaluation_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_course_evaluations_on_course_id"
+    t.index ["evaluation_id"], name: "index_course_evaluations_on_evaluation_id"
+  end
+
+  create_table "course_users", force: :cascade do |t|
+    t.integer "course_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_course_users_on_course_id"
+    t.index ["user_id"], name: "index_course_users_on_user_id"
+  end
+
+  create_table "courses", force: :cascade do |t|
+    t.string "descripcion"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "evaluation_questions", force: :cascade do |t|
     t.integer "question_id"
@@ -99,6 +135,18 @@ ActiveRecord::Schema.define(version: 20180524210920) do
     t.index ["rda_especific_id"], name: "index_rdae_questions_on_rda_especific_id"
   end
 
+  create_table "tmps", force: :cascade do |t|
+    t.integer "evaluationActive_id"
+    t.integer "program_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "flagAlternativas"
+    t.string "a"
+    t.string "b"
+    t.string "c"
+    t.string "d"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -114,7 +162,7 @@ ActiveRecord::Schema.define(version: 20180524210920) do
     t.datetime "updated_at", null: false
     t.string "nombreC"
     t.string "rut"
-    t.string "username"
+    t.string "rol"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

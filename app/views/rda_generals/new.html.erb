@@ -1,6 +1,16 @@
+<% if user_signed_in? %>
+  <%if current_user.rol=="Profesor"%>
+
+
 <center><h1>Nuevo resultado de aprendizaje general</h1></center>
 
 <%= render 'form', rda_general: @rda_general %>
 
 
 <%= link_to 'Volver', rda_generals_path %>
+  <%else%>
+  <h1><center>No tiene los permisos necesarios.</center></h1>
+  <%end%>
+<%else%>
+  <h1>Debe iniciar sesión</h1>
+<%end%>
