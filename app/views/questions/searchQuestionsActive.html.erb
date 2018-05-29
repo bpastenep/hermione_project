@@ -5,7 +5,7 @@
 			<center><p> NO existen preguntas activas </p></center>
 		<%else%>
 			<p align=center><%=@resultado.enunciado%></p>
-			<%if @resultado.imagen.url(:medium) == "Missing"%>
+			<%if @resultado.imagen_file_name.nil? %>
 				<center></center>
 			<%else%>
 				<center><%= image_tag @resultado.imagen.url(:medium) %></center>
@@ -15,7 +15,7 @@
 				<tbody>
 					<tr>
 						<td WIDTH="50">
-							<input type="radio" id="opcionA" name="opcion" value="<%= @respuestasD[0] %>">A<br>
+							<input class="mr-2" type="radio" id="opcionA" name="opcion" value="<%= @respuestasD[0] %>">A<br>
 						</td>
 						<td>
 							<p> <%= @respuestasD[0] %></p>
@@ -23,7 +23,7 @@
 					</tr>
 					<tr>
 						<td>
-							<input type="radio" id="opcionB" name="opcion" value="<%=@respuestasD[1]%>">B<br>
+							<input class="mr-2" type="radio" id="opcionB" name="opcion" value="<%=@respuestasD[1]%>">B<br>
 						</td>
 						<td>
 							<p> <%=@respuestasD[1]%> </p>
@@ -31,7 +31,7 @@
 					</tr>
 					<tr>
 						<td>
-							<input type="radio" id="opcionC" name="opcion" value="<%=@respuestasD[2]%>">C<br>
+							<input class="mr-2" type="radio" id="opcionC" name="opcion" value="<%=@respuestasD[2]%>">C<br>
 						</td>
 						<td>
 							<p> <%=@respuestasD[2]%> </p>
@@ -39,7 +39,7 @@
 					</tr>
 					<tr>
 						<td>
-							<input type="radio" id="opcionD" name="opcion" value="<%=@respuestasD[3]%>">D<br>
+							<input class="mr-2" type="radio" id="opcionD" name="opcion" value="<%=@respuestasD[3]%>">D<br>
 						</td>
 						<td>
 							<p> <%=@respuestasD[3]%> </p>
@@ -77,7 +77,9 @@
 			url: "<%= saveanswer_path %>",
 			data: {question_id: "<%= @resultado.id %>", respuesta: rate_value, user_id:"<%=current_user.id%>", opcion: letra},
 			dataType: 'json',
-			success: {status: "ok"}
+			success: function(){
+				alert("Su respuesta ha sido guardada");
+			}
 		});
 	});
 

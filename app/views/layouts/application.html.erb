@@ -5,6 +5,8 @@
       <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <%= stylesheet_link_tag "custom.css" %>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -23,23 +25,19 @@
     
   </head>
   <body>
-<% if user_signed_in? %>
-<%if current_user.rol=="Profesor"%>
-<div class="container">
-      <% flash.each do |key, value| %>
-        <div class="alert alert-<%= key %>"><%= value %></div>
-      <% end %>
-      <%= yield %>
-      <%= render 'layouts/footer' %>
-      <%= debug(params) if Rails.env.development? %>
-</div>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-navbar">
   <a class="navbar-brand" href="#">Hermione</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
+
+
+  <% if user_signed_in? %>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
+
     <ul class="navbar-nav">
+      <%if current_user.rol=="Profesor"%>
       <li class="nav-item active">
         <a class="nav-link" href=/programs>Programa <span class="sr-only">(current)</span></a>
       </li>
@@ -85,20 +83,28 @@
       <%end%>
     </ul>
   </div>
+
+  <%end%>
+
 </nav>
 
-<%end%>
+<div class="row  px-4">
+  <div class="col-12 text-right"> 
 
- <%= csrf_meta_tags %>
-                  <p class="navbar-text pull-right">
-              <% if user_signed_in? %>
-                  Sesión iniciada como <strong><%= current_user.nombreC %></strong>.
-                <%= link_to 'Editar perfil', edit_user_registration_path, :class => 'navbar-link' %> |
-                <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-              <% else %>
-                <%= link_to "Registrarse", new_user_registration_path, :class => 'navbar-link'  %> |
-                <%= link_to "Iniciar sesión", new_user_session_path, :class => 'navbar-link'  %>
-              <% end %> 
+  <%= csrf_meta_tags %>
+    <p class="navbar-text pull-right">
+    <% if user_signed_in? %>
+        Sesión iniciada como <strong><%= current_user.nombreC %></strong>.
+      <%= link_to 'Editar perfil', edit_user_registration_path, :class => 'navbar-link' %> |
+      <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+    <% else %>
+      <%= link_to "Registrarse", new_user_registration_path, :class => 'navbar-link'  %> |
+      <%= link_to "Iniciar sesión", new_user_session_path, :class => 'navbar-link'  %>
+    <% end %> 
+
+  </div>
+</div>
+
             
 
     <!-- Bootstrap core JavaScript

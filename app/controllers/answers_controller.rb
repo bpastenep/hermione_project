@@ -9,7 +9,8 @@ class AnswersController < ApplicationController
 		letra = params[:opcion]
 		pregunta = Question.find(idQuestion)
 		if (respuesta == pregunta.respuesta)
-			correcto = true
+			correcto = true 
+			tmp.update(correctAlternative: letra)
 		else
 			correcto = false
 		end

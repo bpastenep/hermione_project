@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180528032141) do
+ActiveRecord::Schema.define(version: 20180528223805) do
 
   create_table "answers", force: :cascade do |t|
     t.integer "question_id"
@@ -145,6 +145,8 @@ ActiveRecord::Schema.define(version: 20180528032141) do
     t.string "b"
     t.string "c"
     t.string "d"
+    t.string "correctAlternative"
+    t.boolean "flagAnswer"
   end
 
   create_table "users", force: :cascade do |t|

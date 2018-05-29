@@ -118,6 +118,54 @@ class EvaluationsController < ApplicationController
     end
   end
 
+  def crearGrupo
+=begin
+    tmp = Tmp.last
+    userAnswer = Hash.new 
+    respuestas = Answer.where(question_id: params[:question_id], evaluation_id: params[:evaluation_id])
+    respuestas.each |respuesta| do
+      userAnswer[respuesta.user_id] = respuesta.alternativa
+      if respuesta.alternativa == 'A'
+        a+=1
+      elsif respuesta.alternativa == 'B'
+        b+=1
+      elsif respuesta.alternativa == 'C'
+        c+=1 
+      else respuesta.alternativa == 'D'
+        d+=1
+      end
+    end
+    cantidad = a+b+c+d
+    seleccionCorrecta = tmp.correctAlternative
+    case seleccionCorrecta
+      when "A" 
+        if ((a*100)/cantidad > 35 && (a*100)/cantidad < 75 ) 
+          puts "Se pueden crear grupos"
+        else
+          puts "No se pueden crear grupos"  
+        end
+      when "B" 
+        if ((b*100)/cantidad > 35 && (b*100)/cantidad < 75 ) 
+          puts "Se pueden crear grupos"
+        else
+          puts "No se pueden crear grupos"  
+        end
+      when "C" 
+        if ((c*100)/cantidad > 35 && (c*100)/cantidad < 75 ) 
+          puts "Se pueden crear grupos"
+        else
+          puts "No se pueden crear grupos"  
+        end
+      else 
+        if ((d*100)/cantidad > 35 && (d*100)/cantidad < 75 ) 
+          puts "Se pueden crear grupos"
+        else
+          puts "No se pueden crear grupos"  
+        end
+    end
+=end
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
