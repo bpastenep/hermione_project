@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   post 'desactivarpregunta' => 'evaluations#desactivarpregunta', as: :desactivarpregunta
   get 'searchQuestionActive' => 'questions#searchQuestionsActive', as: :searchQuestionsActive
   post 'saveanswer' => 'answers#saveanswer', as: :saveanswer
+  post 'viewresult' => 'evaluations#viewresult', as: :viewresult
 
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

@@ -13,11 +13,17 @@
 			</thead>
 			<tbody>
 			<% @questions.each do |question| %>
-					<tr >
+					<tr>
 						<td><%= question.enunciado %></td>
-						<td id= '<%= question.id%>'><%= button_to "Activar pregunta", "#", class: "activeQuestion", remote: true %> </td>	
-						<td id= '<%= question.id%>'><%= button_to "Desactivar pregunta", "#", class: "desactiveQuestion", remote: true %> </td>	
-						<td> <%= button_to 'Crear grupos', active_path %></td>
+						<td id= '<%= question.id%>'><%= button_to "Activar pregunta", "#", class: "activeQuestion", id: question.id , remote: true, onclic: 'desactiveButtons' %> </td>	
+						<td id= '<%= question.id%>'><%= button_to "Desactivar pregunta", "#", class: "desactiveQuestion", id: question.id+1, remote: true %> </td>
+						<td> <%= button_to 'Crear grupos', active_path, id: question.id+2 %></td>
+							<tr>
+								<td></td>
+								<td></td>
+								<td><%= button_to 'Ver resultados',"#", class: "viewResult", id: question.id, remote: true %></td>
+								<td></td>
+							</tr>
 					</tr>
 			<%end%>		
 			</tbody>
@@ -50,6 +56,20 @@
 			success: {status: "ok"}
 		});
 	});
+
+	$(".viewResult").click(function(){
+		console.log(this.id);
+		$.ajax({
+			type: 'POST',
+			url: "<%= viewresult_path %>",
+			data: {idEvaluation: "<%= @idEvaluation%>", idPregunta: this.id },
+			dataType: 'json',
+			success: {status: "ok"}
+		}).done(function(data){
+			alert("A:"+data.a+ " B:"+data.b+ " C:"+data.c + " D:"+data.d);
+		});
+	});
+
 	</script>
  <%else%>
  <h1><center>No tiene los permisos necesarios.</center></h1>

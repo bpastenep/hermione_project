@@ -109,7 +109,7 @@ class EvaluationsController < ApplicationController
     idEvaluacion =  params[:idEvaluation]
     idPregunta = params[:idPregunta]
     preguntaAActivar = EvaluationQuestion.where(evaluation_id: idEvaluacion).where(question_id: idPregunta)
-     tmp = Tmp.last
+    tmp = Tmp.last
     tmp.update(flagAlternativas: false)
     if preguntaAActivar.update(logrado: false)
       puts "Pregunta desactivada"
@@ -166,6 +166,31 @@ class EvaluationsController < ApplicationController
 =end
   end
 
+  def viewresult
+    idEvaluacion =  params[:idEvaluation]
+    idPregunta = params[:idPregunta]
+    a = 0
+    b = 0
+    c = 0
+    d = 0
+    puts idPregunta
+    respuestas = Answer.where(question_id: idPregunta, evaluation_id: idEvaluacion)
+    respuestas.each do |respuesta|
+      puts respuesta.alternativa
+      if respuesta.alternativa == 'A'
+        a+=1
+      elsif respuesta.alternativa == 'B'
+        b+=1
+      elsif respuesta.alternativa == 'C'
+        c+=1 
+      else respuesta.alternativa == 'D'
+        d+=1
+      end
+    end
+    respond_to do |format|
+      format.json {render :json =>{a: a, b:b, c:c ,d:d}}
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
