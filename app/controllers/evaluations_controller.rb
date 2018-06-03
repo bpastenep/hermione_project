@@ -84,8 +84,6 @@ class EvaluationsController < ApplicationController
     end
   end
 
-  #Función encargada de la creación de grupos una vez finalizada una pregunta. 
-
 
   #Funcion que permite modficar el estado de una pregunta en la tabla evaluation_question. Cambiando el booleano
   #que existe por cada asociación. 
@@ -142,6 +140,25 @@ class EvaluationsController < ApplicationController
         d = d+1
       end
     end
+=begin
+  def crearGrupo
+
+    tmp = Tmp.last
+    userAnswer = Hash.new 
+    respuestas = Answer.where(question_id: params[:question_id], evaluation_id: params[:evaluation_id])
+    respuestas.each |respuesta| do
+      userAnswer[respuesta.user_id] = respuesta.alternativa
+      if respuesta.alternativa == 'A'
+        a+=1
+      elsif respuesta.alternativa == 'B'
+        b+=1
+      elsif respuesta.alternativa == 'C'
+        c+=1 
+      else respuesta.alternativa == 'D'
+        d+=1
+>>>>>>> 63627cf00e10dcd6aefa61d93f77cf1e281f389e
+      end
+    end
     cantidad = a+b+c+d
     seleccionCorrecta = tmp.correctAlternative
     case seleccionCorrecta
@@ -170,6 +187,9 @@ class EvaluationsController < ApplicationController
           puts "No se pueden crear grupos"  
         end
     end
+<<<<<<< HEAD
+=======
+=end
   end
 
   def viewresult

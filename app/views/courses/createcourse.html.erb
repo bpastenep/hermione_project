@@ -3,14 +3,14 @@
 		<%= form_tag guardarcurso_path do |form| %>
 			<div class="field">
 			      <h3>Nombre curso:</h3>
-			      <%= text_field :nombre, id: :course_nombre , class: 'form-control'%>
+			      <%= text_field :nombre,  class: 'form-control'%>
 		    </div>
 		    <div class="field">
 		    	<%= form_tag import_users_path, multipart: true do %>
-		    	<%= file_field_tag :file %>
-		    	<%end%>
+		    	<%= file_field_tag :file %>		    	
+		    	<%= submit_tag "Crear curso" %>
+		    <%end%>
 		    </div>
-		    <%= submit_tag "Crear curso" %>
 		<%end%>
     
 </div>

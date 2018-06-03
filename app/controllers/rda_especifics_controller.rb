@@ -30,6 +30,7 @@ class RdaEspecificsController < ApplicationController
 
     respond_to do |format|
       if @rda_especific.save
+<<<<<<< HEAD
         format.html { redirect_to @rda_especific, notice: 'Resultado de aprendizaje específico fue creado con éxito' }
         format.json { render :show, status: :created, location: @rda_especific }
       else
@@ -61,9 +62,17 @@ class RdaEspecificsController < ApplicationController
      # proposito.destroy
     #end
     purpose =  @rda_especific.purpose
+<<<<<<< HEAD
     @rda_especific.destroy
     respond_to do |format|
       format.html { redirect_to rda_especifics_url, notice: 'Resultado de aprendizaje específico eliminado satisfactoriamente' }
+=======
+
+    puts "AAAAAAAAAAAAAAAAAAAAAAAAH#{purpose}"
+    @rda_especific.destroy
+    respond_to do |format|
+      format.html { redirect_to rda_especifics_url, notice: 'Rda especific was successfully destroyed.' }
+>>>>>>> 63627cf00e10dcd6aefa61d93f77cf1e281f389e
       format.json { head :no_content }
     end
   end

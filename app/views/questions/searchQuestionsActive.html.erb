@@ -10,7 +10,6 @@
 			<%else%>
 				<center><%= image_tag @resultado.imagen.url(:medium) %></center>
 			<%end%>
-
 			<table align="center" class="table">
 				<tbody>
 					<tr>
@@ -48,8 +47,8 @@
 				</tbody>
 			</table>
 			 <center><%= button_to 'Guardar respuestas', "#", id: "saveAnswer", remote: true  %></center>
-		
 		</div>
+
 
 <script type="text/javascript">
 
@@ -81,11 +80,12 @@
 			success: function(){
 				alert("Su respuesta ha sido guardada");
 			}
-		}),done(alert("funcionó"));
+		});
 	});
+	<%end%>
 
 </script>
-<%end%>
+</script>
   <%else%>
   <h1><center>No tiene los permisos necesarios.</center></h1>
   <%end%>
