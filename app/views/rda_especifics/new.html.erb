@@ -1,0 +1,48 @@
+<% if user_signed_in? %>
+  <%if current_user.rol=="Profesor"%>
+
+<div class="container">
+  <h1>Nuevo resultado de aprendizaje - Específico</h1>
+
+  <%= form_with(model: @rda_especific, local: true) do |form| %>
+    <% if @rda_especific.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@rda_especific.errors.count, "error") %> prohibited this rda_especific from being saved:</h2>
+
+        <ul>
+        <% @rda_especific.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= form.label :descripción %>
+      <%= form.text_area :descripcion, id: :rda_especific_descripcion, class: "form-control" %>
+    </div>
+
+    <div class="field">
+      <%= form.label :rda_general_id %><br>
+      <%= form.select(:rda_general_id) do %>
+          <% @rda_g.each do |c| %>
+            <%= content_tag(:option, c.descripcion, value: c.id , class: 'form-control') %>
+          <% end %>
+        <% end %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit "crear rda especifico", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
+
+<%= link_to 'Volver', rda_especifics_path %>
+
+  <%else%>
+  <h1><center>No tiene los permisos necesarios.</center></h1>
+  <%end%>
+<%else%>
+  <h1>Debe iniciar sesión</h1>
+<%end%>
+

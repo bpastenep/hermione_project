@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  tipo_pregunta: 
+  enunciado: MyText
+  respuesta: MyText
+  respuestas_incor: MyText
+
+two:
+  tipo_pregunta: 
+  enunciado: MyText
+  respuesta: MyText
+  respuestas_incor: MyText

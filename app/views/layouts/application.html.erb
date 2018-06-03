@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hermione</title>
+      <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <%= stylesheet_link_tag "custom.css" %>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>Hermione Project</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../../../dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="starter-template.css" rel="stylesheet">
+
+    
+    
+  </head>
+  <body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-navbar">
+  <a class="navbar-brand" href="#">Hermione</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+
+  <% if user_signed_in? %>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+
+    <ul class="navbar-nav">
+      <%if current_user.rol=="Profesor"%>
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Programa <span class="sr-only">(current)</span></a>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Administrar/Crear
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href=/programs>Programas</a>
+          <a class="dropdown-item" href=/rda_generals>RDA general</a>
+          <a class="dropdown-item" href=/rda_especifics>RDA específico</a>
+          <a class="dropdown-item" href=/purposes>Propósitos</a>
+          <a class="dropdown-item" href=/questions>Preguntas</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Evaluación
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href=/active>Activar Evaluación</a>
+          <a class="dropdown-item" href=/evaluations/new>Crear evaluación</a>
+          <a class="dropdown-item" href=/evaluations>Mostrar evaluaciones</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Curso
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href=/createcourse>Crear curso</a>
+        </div>
+      </li>
+      <%end%>
+      <%if current_user.rol=="Alumno"%>
+       <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Responder
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href=/searchQuestionActive>Visualizar preguntas</a>
+        </div>
+      </li>
+      <%end%>
+    </ul>
+  </div>
+
+  <%end%>
+
+</nav>
+
+<div class="row  px-4">
+  <div class="col-12 text-right"> 
+
+  <%= csrf_meta_tags %>
+    <p class="navbar-text pull-right">
+    <% if user_signed_in? %>
+        Sesión iniciada como <strong><%= current_user.nombreC %></strong>.
+      <%= link_to 'Editar perfil', edit_user_registration_path, :class => 'navbar-link' %> |
+      <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+    <% else %>
+      <%= link_to "Registrarse", new_user_registration_path, :class => 'navbar-link'  %> |
+      <%= link_to "Iniciar sesión", new_user_session_path, :class => 'navbar-link'  %>
+    <% end %> 
+
+  </div>
+</div>
+
+            
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+
+            
+
+    <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+ 	<br>
+    <%= yield %>
+
+
+
+
+  </body>
+</html>

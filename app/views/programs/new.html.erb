@@ -1,0 +1,16 @@
+
+<% if user_signed_in? %>
+  <%if current_user.rol=="Profesor"%>
+
+<center><h1>Nuevo Programa</h1></center>
+
+
+<%= render 'form', program: @program %>
+
+<%= link_to 'Volver', programs_path %>  
+<%else%>
+  <h1><center>No tiene los permisos necesarios.</center></h1>
+  <%end%>
+<%else%>
+  <h1>Debe iniciar sesión</h1>
+<%end%>

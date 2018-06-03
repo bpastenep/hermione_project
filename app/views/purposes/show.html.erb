@@ -1,0 +1,23 @@
+<div class="container">
+<% if user_signed_in? %>
+  <%if current_user.rol=="Profesor"%>
+	<p id="notice"><%= notice %></p>
+	<p>
+	  <strong>Descripcion:</strong>
+	  <%= @purpose.descripcion %>
+	</p>
+
+	<p>
+	  <strong>Rda especific:</strong>
+	  <%= @purpose.rda_especific.descripcion %>
+	</p>
+
+	<%= link_to 'Edit', edit_purpose_path(@purpose) %> |
+	<%= link_to 'Back', purposes_path %>
+	<%else%>
+	  <h1><center>No tiene los permisos necesarios.</center></h1>
+   <%end%>
+<%else%>
+	<h1>Debe iniciar sesión</h1>
+<%end%>
+</div>

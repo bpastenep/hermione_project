@@ -1,0 +1,18 @@
+<% if user_signed_in? %>
+  <%if current_user.rol=="Profesor"%>
+
+
+
+<h1>Editing Rda General</h1>
+
+<%= render 'form', rda_general: @rda_general %>
+
+<%= link_to 'Show', @rda_general %> |
+<%= link_to 'Back', rda_generals_path %>
+
+  <%else%>
+  <h1><center>No tiene los permisos necesarios.</center></h1>
+  <%end%>
+<%else%>
+  <h1>Debe iniciar sesión</h1>
+<%end%>

@@ -1,0 +1,22 @@
+
+<% if user_signed_in? %>
+  <%if current_user.rol=="Profesor"%>
+
+
+	<h1>Editando pregunta</h1>
+
+		<%if current_user.rol=="Profesor"%>
+
+		<%= render 'form', question: @question %>
+
+		<%= link_to 'Show', @question %> |
+		<%= link_to 'Back', questions_path %>
+		<%else%>
+		<h1><center>No posees los permisos</center></h1>
+		<%end%>
+<%else%>
+  <h1><center>No tiene los permisos necesarios.</center></h1>
+  <%end%>
+<%else%>
+  <h1>Debe iniciar sesión</h1>
+<%end%>

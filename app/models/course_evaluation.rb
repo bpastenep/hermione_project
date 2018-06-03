@@ -1,0 +1,2 @@
+class CourseEvaluation < ApplicationRecord
+end

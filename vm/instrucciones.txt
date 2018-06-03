@@ -1,0 +1,26 @@
+﻿1.- instalar oracle vmbox reciente 
+2.- instalar git y asegurarse 
+3.- instalar vagrant reciente
+4.- crear caarpeta c/repositorio/nombre_de_tu_app/
+5.- copiar la carpeta vm ahi
+6.- asegurarse de que C:\Program Files\Git\usr\bin esté en las variables de entorno de windows
+    asegurarse que hyper-v este desactivado en caracteristicas de windows
+7.- editar en el archivo c/repositorio/nombre_de_tu_app/Vagrantfile
+		config.vm.box = "file:///c:/repositorio/nombre_de_tu_app/vm/package.box"
+		config.vm.network "private_network", ip: "192.168.33.111" 
+	poniendo nombre de la carpeta y una ip adecuada
+8.- en consola de comando ir a la carpeta c/repositorio/nombre_de_tu_app/vm
+9.- ejecutar el comando: vagrant up
+10.- ejecutar el comando: vagrant ssh
+
+11.- si aparece el error de guest additions ejecutar
+		vagrant plugin install vagrant-vguest
+
+  ***cada vez que entres al proyecto en la carpeta vm hacer vagrant up y luego vagrant ssh***
+12.- una vez dentro de ubuntu ir a 
+		cd ../../vagrant
+	aqui deberia estar el proyecto
+
+cada vez que entres al proyecto en la carpeta vm hacer vagrant up y luego vagrant ssh
+	
+

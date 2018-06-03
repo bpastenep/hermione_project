@@ -1,0 +1,40 @@
+<% if user_signed_in? %>
+  <%if current_user.rol=="Profesor"%>
+
+<div class="container">
+  <p id="notice"><%= notice %></p>
+
+  <h1>Preguntas</h1>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Enunciado</th>
+        <th>Respuesta</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @questions.each do |question| %>
+        <tr>>
+          <td><%= question.enunciado %></td>
+          <td><%= question.respuesta %></td>
+          <td><%= link_to 'Mostrar', question %></td>
+          <td><%= link_to 'Editar', edit_question_path(question) %></td>
+          <td><%= link_to 'Eliminar', question, method: :delete, data: { confirm: 'Está completamente seguro?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+
+<%= link_to 'Nueva pregunta', new_question_path %>
+</div>
+  <%else%>
+  <h1><center>No tiene los permisos necesarios.</center></h1>
+  <%end%>
+<%else%>
+  <h1>Debe iniciar sesión</h1>
+<%end%>

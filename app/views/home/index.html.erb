@@ -1,0 +1,19 @@
+<div class="container">
+	<%if user_signed_in? %>
+		<h1> <center>Bienvenido al proyecto Hermione </h1></center>
+		 <%if current_user.rol=="Profesor"%>
+			<%if @programs.nil? %>
+				No existen programas creados, ¿Desea agregar uno?
+				<%= link_to 'Agregar un programa', new_program_path %>
+			<%else%>	
+				<%= form_tag cargarprograma_url do |form| %>
+					seleccione el programa con el que desea trabajar
+					<%= select_tag "program_id", options_from_collection_for_select(@programs, "id", "nombre") %> 
+					<%= submit_tag "Cargar programa", class: 'btn btn-primaty'%>
+				<%end%>
+			<%end%>
+		<%end%>
+	<%else%>
+		<center><%= link_to "Iniciar sesión", new_user_session_path, :class => 'navbar-link'  %> </center>
+	<%end%>
+</div>

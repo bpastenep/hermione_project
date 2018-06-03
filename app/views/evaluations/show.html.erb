@@ -1,0 +1,25 @@
+<% if user_signed_in? %>
+  <%if current_user.rol=="Profesor"%>
+
+
+
+	<p id="notice"><%= notice %></p>
+
+	<p>
+	  <strong>Objetivo:</strong>
+	  <%= @evaluation.objetivo %>
+	</p>
+
+	<p>
+	  <strong>Fecha:</strong>
+	  <%= @evaluation.fecha %>
+	</p>
+
+	<%= link_to 'Edit', edit_evaluation_path(@evaluation) %> |
+	<%= link_to 'Back', evaluations_path %>
+  <%else%>
+  <h1><center>No tiene los permisos necesarios.</center></h1>
+  <%end%>
+<%else%>
+  <h1>Debe iniciar sesión</h1>
+<%end%>

@@ -1,0 +1,96 @@
+<% if user_signed_in? %>
+<%if current_user.rol=="Alumno" || current_user.rol=="Profesor" %>
+		<div class="container">
+		<%if @resultado.nil?%>
+			<center><p> NO existen preguntas activas </p></center>
+		<%else%>
+			<p align=center><%=@resultado.enunciado%></p>
+			<%if @resultado.imagen_file_name.nil? %>
+				<center></center>
+			<%else%>
+				<center><%= image_tag @resultado.imagen.url(:medium) %></center>
+			<%end%>
+
+			<table align="center" class="table">
+				<tbody>
+					<tr>
+						<td WIDTH="50">
+							<input class="mr-2" type="radio" id="opcionA" name="opcion" value="<%= @respuestasD[0] %>">A<br>
+						</td>
+						<td>
+							<p> <%= @respuestasD[0] %></p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input class="mr-2" type="radio" id="opcionB" name="opcion" value="<%=@respuestasD[1]%>">B<br>
+						</td>
+						<td>
+							<p> <%=@respuestasD[1]%> </p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input class="mr-2" type="radio" id="opcionC" name="opcion" value="<%=@respuestasD[2]%>">C<br>
+						</td>
+						<td>
+							<p> <%=@respuestasD[2]%> </p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input class="mr-2" type="radio" id="opcionD" name="opcion" value="<%=@respuestasD[3]%>">D<br>
+						</td>
+						<td>
+							<p> <%=@respuestasD[3]%> </p>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			 <center><%= button_to 'Guardar respuestas', "#", id: "saveAnswer", remote: true  %></center>
+		
+		</div>
+
+<script type="text/javascript">
+
+	$("#saveAnswer").click(function(){
+		this.disabled=true;
+		var rate_value;
+		var letra
+		if (document.getElementById("opcionA").checked) {
+  			rate_value = document.getElementById('opcionA').value;
+  			letra = "A";
+		}
+		if (document.getElementById("opcionB").checked) {
+  			rate_value = document.getElementById('opcionB').value;
+  			letra = "B";
+		}
+		if (document.getElementById("opcionC").checked) {
+  			rate_value = document.getElementById('opcionC').value;
+  			letra = "C"	
+		}
+		if (document.getElementById("opcionD").checked) {
+  			rate_value = document.getElementById('opcionD').value;
+  			letra = "D"
+		}
+		$.ajax({
+			type: 'POST',
+			url: "<%= saveanswer_path %>",
+			data: {question_id: "<%= @resultado.id %>", respuesta: rate_value, user_id:"<%=current_user.id%>", opcion: letra},
+			dataType: 'json',
+			success: function(){
+				alert("Su respuesta ha sido guardada");
+			}
+		}),done(alert("funcionó"));
+	});
+
+</script>
+<%end%>
+  <%else%>
+  <h1><center>No tiene los permisos necesarios.</center></h1>
+  <%end%>
+<%else%>
+  <h1>Debe iniciar sesión</h1>
+<%end%>
+
+

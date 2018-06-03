@@ -1,0 +1,37 @@
+<div class= "container">
+
+<table class="table">
+	<tbody>
+	<tr>
+	<td>
+		<h4> Rda General </h4>	
+	</td>
+	<td>
+		<h5> <%= @rdaG.descripcion%> </h5>
+	</td>
+	</tr>
+	<tr>
+	<td>
+		<h4> Rda Específicos </h4>	
+	</td>
+	<%@rdaE.each do |rda|%>
+	<td>
+		<h5> <%= rda.descripcion%> </h5>
+	</td>
+	<%end%>
+	</tr>
+	<tr>
+	<td>
+		<h4> Propósitos </h4>	
+	</td>
+	<%@rdaE.each do |rda|%>
+	<td>
+		 <% rda.purpose.each do |purpose|%> 
+		 	<td><h5><%=purpose.descripcion%></h5></td>
+		 <%end%>
+	</td>
+	<%end%>
+	</tr>
+
+
+</div>

@@ -1,0 +1,13 @@
+  <%else%>
+  <h1><center>No tiene los permisos necesarios.</center></h1>
+
+<h1>Editando Programa</h1>
+
+<%= render 'form', program: @program %>
+
+<%= link_to 'Mostrar', @program %> |
+<%= link_to 'Volver', programs_path %>
+  <%end%>
+<%else%>
+  <h1>Debe iniciar sesión</h1>
+<%end%>
