@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
-	def import 
-		puts "entre a la funcion importaaaaaaaaaaaaaaaaaaaaaar"
+	def import
+		file = params[:file] 
+		puts file.path
 		User.import(params[:file])
-		redirecto programs_path, notice: "Alumnos agredos correctamente"
+		redirec_to programs_path, notice: "Alumnos agredos correctamente"
+	end
 end

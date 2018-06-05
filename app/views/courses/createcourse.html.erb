@@ -1,16 +1,17 @@
 <div class="container">
-
-		<%= form_tag guardarcurso_path do |form| %>
+<div class="media">
+<div class="media-body">
+		<%= form_tag guardarcurso_path, multipart: true do |form| %>
 			<div class="field">
 			      <h3>Nombre curso:</h3>
 			      <%= text_field :nombre,  class: 'form-control'%>
 		    </div>
 		    <div class="field">
-		    	<%= form_tag import_users_path, multipart: true do %>
 		    	<%= file_field_tag :file %>		    	
 		    	<%= submit_tag "Crear curso" %>
-		    <%end%>
 		    </div>
 		<%end%>
+</div>
+</div>
     
 </div>
