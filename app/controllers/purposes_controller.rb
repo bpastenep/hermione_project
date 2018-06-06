@@ -56,14 +56,9 @@ class PurposesController < ApplicationController
   # DELETE /purposes/1.json
    
  def destroy
-    @purpose.destroy
-
+    @purpose.destroy  
     respond_to do |format|
-<<<<<<< HEAD
       format.html { redirect_to purposes_url, notice: 'El propósito seleccionado fue correctamente eliminado.' }
-=======
-      format.html { redirect_to purposes_url, notice: 'Purpose was successfully destroyed.' }
->>>>>>> 63627cf00e10dcd6aefa61d93f77cf1e281f389e
       format.json { head :no_content }
     end
   end

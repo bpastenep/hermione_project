@@ -1,13 +1,11 @@
 class CoursesController < ApplicationController
 
 	def guardarcurso
-		puts "AAAAAAAALO"
-		uploader = CsvcursoUploader.new
-		uploader.store!(params[:file])
-		datos = CsvcursoUploader.last
-		contenido = datos.attachment.read
-		puts contenido 
-
+		curso = Course.new
+		curso.nomina = params[:file]	
+		curso.nomina.each do |f|
+			puts f
+		end
 		#User.import(params[:file])
 		#redirec_to programs_path, notice: "Alumnos agredos correctamente"
 	end
