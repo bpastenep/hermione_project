@@ -67,9 +67,20 @@ class CoursesController < ApplicationController
 		arrayFinal.each do |arrayPropositos|
 			@conteoPropositos[arrayPropositos[0]] = @conteoPropositos[arrayPropositos[0]] + 1
 			if arrayPropositos[1]
-				@respuestaPropositos[arrayPropositos[0]] = @respuestaPropositos[arrayPropositos[0]] + 1
+				@respuestaPropositos[arrayPropositos[0]] = @espuestaPropositos[arrayPropositos[0]] + 1
 			end 
 		end
-
 	end
+
+
+	def crearReporteCurso
+		id_curso = params[id_curso]
+		curso = Course.find(id_curso)
+		evaluaciones = curso.evaluation
+		questions = []
+		evaluaciones.each do |evaluacion|
+			questions << evaluaciones.question
+		end 
+		propositos = questions.puposes
+	end 
 end
