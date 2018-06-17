@@ -76,7 +76,6 @@ class QuestionsController < ApplicationController
   end
 
   def searchQuestionsActive
-    puts "Entréeeeeeeeeeeeeeeeeeeeeeeee"
     active = EvaluationQuestion.where(logrado: true)
     puts active
     if active.nil?
@@ -87,9 +86,7 @@ class QuestionsController < ApplicationController
       @respuestasD = Array.new(4)
       tmp = Tmp.last
       active.each do |pregunta|
-        puts "ENTREE"
         idPregunta = pregunta.question_id
-        puts "AAAAAAAAAAA#{idPregunta}"
         @resultado = Question.find(idPregunta)
         if @resultado.nil?
           puts "no encontré preguntas con ese id"
@@ -97,11 +94,11 @@ class QuestionsController < ApplicationController
         puts "BBBBBBBBBBBBBBB #{@resultado}"
       end 
       respuestas[0]=@resultado.respuesta
+      tmp.correctAlternative = @resultado.respuesta
       respuestas[1]=@resultado.respuestas_incor
       respuestas[2]=@resultado.respuesta_incorrecta2
       respuestas[3]=@resultado.respuesta_incorrecta3
       if tmp.flagAlternativas
-        puts "AAAAAAAAAAAAAAAAAH"
         @respuestasD = respuestas.shuffle
         puts @respuestasD[0]
         puts @respuestasD[1]

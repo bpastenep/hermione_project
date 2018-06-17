@@ -2,8 +2,6 @@
 <div class="container">
 <% if user_signed_in? %>
   <%if current_user.rol=="Profesor"%>
-
-
     <h1>Nueva evaluación</h1>
     <%= form_with(model: @evaluation, local: true) do |form| %>
       <% if @evaluation.errors.any? %>
@@ -17,6 +15,7 @@
           </ul>
         </div>
       <% end %>
+
       <table>
       <tr>
       <div class="field">
@@ -54,11 +53,13 @@
       </tr>
       </div>
       </table>
-
       <div class="actions">
         <%= form.submit "Crear evaluación" , class: "btn btn-primary"  %>
       </div>
     <%end%>
   <%else%>
     <h1><center>No tiene los permisos necesarios.</center></h1>
-
+<%end%>
+<%else%>
+  <h1>Debe iniciar sesión</h1>
+<%end%>

@@ -11,9 +11,7 @@ class HomeController < ApplicationController
   	tmp = Tmp.last 
   	tmp.update(program_id: idProgram)
   	@program = Program.find(idProgram)
-  	puts "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA #{@program.RdaGeneral.descripcion}"
   	@rdaG = @program.RdaGeneral
-  	puts "ID RDAAAA GENERAL #{@rdaG.id}"
   	@rdaE = RdaEspecific.where(rda_general_id: @rdaG.id) 	
   end
 end

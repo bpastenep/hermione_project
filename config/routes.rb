@@ -6,9 +6,7 @@ Rails.application.routes.draw do
   resources :rda_especifics
   resources :rda_generals
   resources :programs
-  resources :users do 
-    collection {post :import }
-  end
+  resources :users
   root to: 'home#index'
   
   get 'active' => 'evaluations#active', as: :active
@@ -23,7 +21,7 @@ Rails.application.routes.draw do
   post 'cargarprograma' => 'home#cargarprograma', as: :cargarprograma
   get 'createcourse' => 'courses#createcourse', as: :createcourse
   post 'guardarcurso' => 'courses#guardarcurso', as: :guardarcurso
-
+  get 'cursoShow' => 'courses#show', as: :cursoShow
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

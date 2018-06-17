@@ -80,6 +80,11 @@
           <a class="dropdown-item" href=/searchQuestionActive>Visualizar preguntas</a>
         </div>
       </li>
+      <%if current_user.asignacionGrupo%>
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Grupo <%=current_user.grupo %> <span class="sr-only">(current)</span></a>
+      </li>
+      <%end%>
       <%end%>
     </ul>
   </div>

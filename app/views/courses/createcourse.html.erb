@@ -4,8 +4,14 @@
 		<%= form_tag guardarcurso_path, multipart: true do |form| %>
 			<div class="field">
 			      <h3>Nombre curso:</h3>
-			      <%= text_field :nombre,  class: 'form-control'%>
+			      <%= text_field_tag :nombre%>
 		    </div>
+		
+		    <div class="field">
+		    	<h5> Seleccione programa asociado al curso </h5>
+		    	<%= select_tag "program_id", options_from_collection_for_select(@programs, "id", "nombre") %> 
+		    </div>
+
 		    <div class="field">
 		    	<%= file_field_tag :file %>		    	
 		    	<%= submit_tag "Crear curso" %>

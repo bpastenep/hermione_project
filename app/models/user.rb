@@ -19,11 +19,15 @@ class User < ApplicationRecord
       end
     end
 
-  def self.import(file)
-      CSV.foreach(file.path, headers: true) do |row|
-        User.create! row.to_hash
+  def asignarGrupo(matrizGrupos)
+    contador = 1
+    matrizGrupos.each do |arreglosIds|
+      arreglosIds.each do |user_id|
+        usuario = User.find(user_id)
+        usuario.update(asignacionGrupo: true, grupo:contador)
       end
+      contador = contador + 1
+    end
   end
-
 end
 

@@ -38,7 +38,7 @@ class EvaluationsController < ApplicationController
         question_ids.each do |question_id|
           EvaluationQuestion.create(question_id: question_id, evaluation_id: evaluation_id)
         end
-        format.html { redirect_to @evaluation, notice: 'Evaluation was successfully created.' }
+        format.html { redirect_to @evaluation, notice: 'La evaluación fue creada con éxito' }
         format.json { render :show, status: :created, location: @evaluation }
       else
         format.html { render :new }
@@ -52,7 +52,7 @@ class EvaluationsController < ApplicationController
   def update
     respond_to do |format|
       if @evaluation.update(evaluation_params)
-        format.html { redirect_to @evaluation, notice: 'Evaluation was successfully updated.' }
+        format.html { redirect_to @evaluation, notice: 'La evaluación fue actualizada correctamente' }
         format.json { render :show, status: :ok, location: @evaluation }
       else
         format.html { render :edit }
@@ -66,7 +66,7 @@ class EvaluationsController < ApplicationController
   def destroy
     @evaluation.destroy
     respond_to do |format|
-      format.html { redirect_to evaluations_url, notice: 'Evaluation was successfully destroyed.' }
+      format.html { redirect_to evaluations_url, notice: 'La evaluación fue eliminada satisfactoriamente' }
       format.json { head :no_content }
     end
   end
@@ -116,7 +116,7 @@ class EvaluationsController < ApplicationController
 
 
   #Función encargada de la creación de grupos una vez finalizada una pregunta. 
-  def crearGrupo
+  def crearGrupo 
     puts "entre a crear grupo"
     tmp = Tmp.last
     #Iniciación de variables que cuentan la cantidad de alternativas seleccionadas
@@ -124,73 +124,74 @@ class EvaluationsController < ApplicationController
     b=0
     c=0
     d=0
+    largo = 0
+    userCorrecto = []
+    temporal = []
+    grupos = []
+    contador = 0
+    cantidadLogrado = 0
     userAnswer = Hash.new 
+    puts params[:idPregunta]
+    puts params[:idEvaluation]
     respuestas = Answer.where(question_id: params[:idPregunta], evaluation_id: params[:idEvaluation])
+    cantidadIntegrantes = params[:cantidadIntegrantes]
+    cantidadIntegrantes = Integer(cantidadIntegrantes)
     respuestas.each  do |respuesta|
-      puts "AAAAAAAAAAAAAAAH"  
-      userAnswer[respuesta.user_id] = respuesta.alternativa
-      puts userAnwer[respuesta.user_id]
+      if respuesta.correct
+        cantidadLogrado = cantidadLogrado + 1
+      end
+      userAnswer[respuesta.user_id] =  respuesta.alternativa
       if respuesta.alternativa == 'A'
         a = a+1
       elsif respuesta.alternativa == 'B'
         b = b+1
       elsif respuesta.alternativa == 'C'
         c = c+1 
-      else respuesta.alternativa == 'D'
+      else
         d = d+1
       end
     end
-=begin
-  def crearGrupo
-
-    tmp = Tmp.last
-    userAnswer = Hash.new 
-    respuestas = Answer.where(question_id: params[:question_id], evaluation_id: params[:evaluation_id])
-    respuestas.each |respuesta| do
-      userAnswer[respuesta.user_id] = respuesta.alternativa
-      if respuesta.alternativa == 'A'
-        a+=1
-      elsif respuesta.alternativa == 'B'
-        b+=1
-      elsif respuesta.alternativa == 'C'
-        c+=1 
-      else respuesta.alternativa == 'D'
-        d+=1
->>>>>>> 63627cf00e10dcd6aefa61d93f77cf1e281f389e
+    if userAnswer.length > 6 
+      if (cantidadLogrado*100)/ userAnswer.length > 35 && (cantidadLogrado*100)/ userAnswer.length < 75 
+        cantidadGrupos = userAnswer.length / cantidadIntegrantes
+        if cantidadGrupos > 2
+          userAnswer.each do |key, value|
+            if value == tmp.correctAlternative
+                userCorrecto << key
+            else
+                temporal << key 
+            end
+          end
+          temporal.each do |userid|
+            userCorrecto << userid
+          end
+          grupos = []
+          (1..cantidadGrupos).each do |grupo|
+            grupos << [userCorrecto.shift]
+          end
+          puts "Primeros grupos #{grupos}"
+          userCorrecto.each_with_index do |user, index|
+            grupos[index%cantidadGrupos] << user
+          end
+          puts "Grupos #{grupos}"
+          User.asignarGrupo(grupos)
+          # I1 I4 I7 Las columnas definen el grupo 
+          # I2 I5 I8
+          # I3 I6 I9
+          #Crear matriz cantidad de filas cantidadGrupos, columnas cantidad de intengrantes. 
+          #llenar matriz primero en columnas con los integrantes que respondieron bien 
+          #Llenar matriz por fila con el resto de los integrantes. 
+          # asignarColor (matriz)
+        else
+            puts "No se pueden crear grupos, no cumple con la cantidad minima"    
+        end
+      else
+        puts "Las respuestas correctas no son suficientes para armar grupos"
       end
+    else 
+      puts "No hay la cantidad de usuarios para generar grupos"
     end
-    cantidad = a+b+c+d
-    seleccionCorrecta = tmp.correctAlternative
-    case seleccionCorrecta
-      when "A" 
-        if ((a*100)/cantidad > 35 && (a*100)/cantidad < 75 ) 
-          puts "Se pueden crear grupos"
-        else
-          puts "No se pueden crear grupos"  
-        end
-      when "B" 
-        if ((b*100)/cantidad > 35 && (b*100)/cantidad < 75 ) 
-          puts "Se pueden crear grupos"
-        else
-          puts "No se pueden crear grupos"  
-        end
-      when "C" 
-        if ((c*100)/cantidad > 35 && (c*100)/cantidad < 75 ) 
-          puts "Se pueden crear grupos"
-        else
-          puts "No se pueden crear grupos"  
-        end
-      else 
-        if ((d*100)/cantidad > 35 && (d*100)/cantidad < 75 ) 
-          puts "Se pueden crear grupos"
-        else
-          puts "No se pueden crear grupos"  
-        end
-    end
-<<<<<<< HEAD
-=======
-=end
-  end
+ end
 
   def viewresult
     idEvaluacion =  params[:idEvaluation]
