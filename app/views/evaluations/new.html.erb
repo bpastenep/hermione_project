@@ -30,6 +30,13 @@
         <td>
       </div>
       </tr>
+      <tr>
+      <div class="field">
+        <td><h2>seleccione Curso </h2></td>
+        <td><%= form.select "course_id", options_from_collection_for_select(@courses, "id", "descripcion") %> </td>
+        <td>
+      </div>
+      </tr>
       
       <div class="field">
       <tr>
@@ -39,12 +46,7 @@
           <% @question.each do |c| %>
           <tr>
           <td>
-              <%= check_box_tag "questions[]", c.id %>        <%= label_tag(:questions, c.enunciado) %>
-              <td> <% proposito = c.purpose%> 
-                   <%proposito.each do |pro|  %>
-                      <%= pro.descripcion %>
-                    <%end%>
-                </td>
+              <%= check_box_tag "questions[]", c.id %><%= label_tag(:questions, c.enunciado) %>
           </td>
         </tr>
           <%end%>

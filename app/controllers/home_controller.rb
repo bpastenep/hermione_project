@@ -14,4 +14,10 @@ class HomeController < ApplicationController
   	@rdaG = @program.RdaGeneral
   	@rdaE = RdaEspecific.where(rda_general_id: @rdaG.id) 	
   end
+
+
+  def datosReporteAlumno
+    puts "Entre a verificar los datos del reporte"
+    @courses = Course.all
+  end
 end

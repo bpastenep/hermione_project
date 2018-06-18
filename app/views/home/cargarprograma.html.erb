@@ -1,40 +1,48 @@
-<div class= "container">
+<% if user_signed_in? %>
+  <%if current_user.rol=="Profesor"%>
+		<div class= "container">
 
-<table class="table">
-	<tbody>
-	<tr>
-	<td>
-		<h4> Rda General </h4>	
-	</td>
-	<td>
-		<h5> <%= @rdaG.descripcion%> </h5>
-	</td>
-	</tr>
-	<tr>
-	<td>
-		<h4> Rda Específicos </h4>	
-	</td>
-	<%@rdaE.each do |rda|%>
-	<td>
-		<h5> <%= rda.descripcion%> </h5>
-	</td>
-	<%end%>
-	</tr>
-	<tr>
-	<td>
-		<h4> Propósitos </h4>	
-	</td>
-	<%@rdaE.each do |rda|%>
-	<td>
-		 <% rda.purpose.each do |purpose|%> 
-		 	<td><h5><%=purpose.descripcion%></h5></td>
-		 <%end%>
-	</td>
-	<%end%>
-	</tr>
-</tbody>
-</table>
+		<table class="table">
+			<tbody>
+			<tr>
+			<td>
+				<h4> Rda General </h4>	
+			</td>
+			<td>
+				<h5> <%= @rdaG.descripcion%> </h5>
+			</td>
+			</tr>
+			<tr>
+			<td>
+				<h4> Rda Específicos </h4>	
+			</td>
+			<%@rdaE.each do |rda|%>
+			<td>
+				<h5> <%= rda.descripcion%> </h5>
+			</td>
+			<%end%>
+			</tr>
+			<tr>
+			<td>
+				<h4> Propósitos </h4>	
+			</td>
+			<%@rdaE.each do |rda|%>
+			<td>
+				 <% rda.purpose.each do |purpose|%> 
+				 	<td><h5><%=purpose.descripcion%></h5></td>
+				 <%end%>
+			</td>
+			<%end%>
+			</tr>
+		</tbody>
+		</table>
 
-	<%= link_to 'Ver cursos asociados a este programa', cursoShow_path %>
+			<%= link_to 'Ver cursos asociados a este programa', cursoShow_path %>
 
-</div>
+		</div>
+  <%else%>
+ <h1><center>No tiene los permisos necesarios.</center></h1>
+  <%end%>
+<%else%>
+  <h1>Debe iniciar sesión</h1>
+<%end%>

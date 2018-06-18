@@ -1,0 +1,24 @@
+<div class = "container">
+<% if user_signed_in? %>
+  <%if current_user.rol=="Profesor"%>
+  <%= form_tag crearReporteAlumno_url do |form| %>
+  	<div class="field">
+        <h2>Seleccione Curso </h2>
+        <%= select_tag "course_id", options_from_collection_for_select(@courses, "id", "descripcion") %> 
+      </div>
+      <div class="field">
+        <h2>Rut alumno</h2>
+        <%= text_field_tag "rut"%>
+      </div>
+
+  	<div class="actions">
+    	<%= submit_tag "Generar reporte" %>
+  	</div>	
+  <%end%>
+  <%else%>
+ <h1><center>No tiene los permisos necesarios.</center></h1>
+  <%end%>
+<%else%>
+  <h1>Debe iniciar sesión</h1>
+<%end%>
+</div>

@@ -22,6 +22,9 @@ Rails.application.routes.draw do
   get 'createcourse' => 'courses#createcourse', as: :createcourse
   post 'guardarcurso' => 'courses#guardarcurso', as: :guardarcurso
   get 'cursoShow' => 'courses#show', as: :cursoShow
+  get 'reports' => 'home#reports', as: :reports
+  post 'crearReporteAlumno' => 'courses#crearReporteAlumno', as: :crearReporteAlumno
+  post 'datosReporteAlumno' => 'home#datosReporteAlumno', as: :datosReporteAlumno
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

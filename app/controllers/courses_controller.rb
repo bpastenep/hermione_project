@@ -25,14 +25,57 @@ class CoursesController < ApplicationController
 
 	def show
 		tmp = Tmp.last
-		@cursos = Course.where(program_id: tmp.program_id) 
+		@courses = Course.where(program_id: tmp.program_id) 
 	end
 
 	def crearReporteAlumno
+		puts "AAAAAAAAAAAAAAAAAAAAAAA"
 		rutAlumno = params[:rut]
 		user = User.where(rut: rutAlumno).last
 		idCurso = params[:course_id]
 		curso = Course.find(idCurso)
+		respuestas = []
+		curso.evaluation.each do |e|
+  			e.question.each do |q|
+   				 ans = q.answer.where(user_id: user.id).last
+   				 if not ans.nil?
+   				 	if not respuestas.include? ans
+   				 		respuestas << ans 
+   				 	end
+   				 end
+			end
+		end
+		puts "AAAAAAAAAAAAH"
+		propositos_id = []
+		correcta = []
+		respuestas.each do |respuesta|
+			propositos_id << respuesta.purpose_id
+			correcta << respuesta.correct
+		end
+		pp propositos_id
+		pp correcta
+		repetir = []
+		ids = []
+		hashIdsPropositosCantidad = Hash.new 
+		for i in 0..propositos_id.length-1
+			cantidad = 0 
+			cantidadBuenas = 0
+		    if not repetir.include? propositos_id[i]
+				repetir << propositos_id[i]
+				cantidad = propositos_id.count(propositos_id[i])
+				puts "cantidad #{cantidad}"
+				for j in 0..propositos_id.length-1
+					if propositos_id[i] == propositos_id[j]
+						if correcta[j]
+							cantidadBuenas = cantidadBuenas+1
+						end
+					end 
+				end
+			end
+			hashIdsPropositosCantidad[propositos_id]=[cantidad,cantidadBuenas]
+		end
+		pp hashIdsPropositosCantidad
+=begin
 		evaluaciones = curso.evaluation
 		questions_id = []
 		evaluations_id = []
@@ -70,17 +113,19 @@ class CoursesController < ApplicationController
 				@respuestaPropositos[arrayPropositos[0]] = @espuestaPropositos[arrayPropositos[0]] + 1
 			end 
 		end
+=end
 	end
 
-
+=begin
 	def crearReporteCurso
-		id_curso = params[id_curso]
+		id_curso = params[:id_curso]
 		curso = Course.find(id_curso)
+		alumnos = curso.user
 		evaluaciones = curso.evaluation
-		questions = []
-		evaluaciones.each do |evaluacion|
-			questions << evaluaciones.question
-		end 
-		propositos = questions.puposes
-	end 
+
+		alumnos.each do |alumno| 
+
+		
+	end
+=end 
 end

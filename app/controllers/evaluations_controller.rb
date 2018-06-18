@@ -18,6 +18,7 @@ class EvaluationsController < ApplicationController
   def new
     @evaluation = Evaluation.new
     @question = Question.all
+    @courses = Course.all
   end 
 
   # GET /evaluations/1/edit
@@ -27,12 +28,16 @@ class EvaluationsController < ApplicationController
   # POST /evaluations
   # POST /evaluations.json
   def create
+    puts evaluation_params
     @evaluation = Evaluation.new(evaluation_params)
      #De aca en adelante es para lograr insertar datos en la tabla intermedia 
-    #La Tabla intermedia se lla evaluation_question
+    #La Tabla intermedia se la evaluation_question
     respond_to do |format|
+      puts "Entre al respond"
       if @evaluation.save
+        puts "Pude guardarlo"
         evaluation = Evaluation.last
+        evaluation.update(course_id: params[:course_id])
         evaluation_id = evaluation.id
         question_ids = params[:questions]
         question_ids.each do |question_id|
@@ -41,6 +46,8 @@ class EvaluationsController < ApplicationController
         format.html { redirect_to @evaluation, notice: 'La evaluación fue creada con éxito' }
         format.json { render :show, status: :created, location: @evaluation }
       else
+        @question = Question.all
+        @courses = Course.all
         format.html { render :new }
         format.json { render json: @evaluation.errors, status: :unprocessable_entity }
       end
@@ -227,6 +234,6 @@ class EvaluationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def evaluation_params
-      params.require(:evaluation).permit(:objetivo, :fecha)
+      params.require(:evaluation).permit(:objetivo, :fecha, :course_id)
     end
 end
