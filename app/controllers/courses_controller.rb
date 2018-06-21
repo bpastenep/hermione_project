@@ -24,20 +24,23 @@ class CoursesController < ApplicationController
 	end
 
 	def show
-		tmp = Tmp.last
-		@courses = Course.where(program_id: tmp.program_id) 
+		@course = Course.last
+		tablaIntermedia = CourseUser.where(@course.id)
+		@user = []
+		tablaIntermedia.each do |cursouser| 
+			@users << User.find(cursouser.user_id)
+		end 
 	end
 
 	def crearReporteAlumno
-		puts "AAAAAAAAAAAAAAAAAAAAAAA"
 		rutAlumno = params[:rut]
-		user = User.where(rut: rutAlumno).last
+		@user = User.where(rut: rutAlumno).last
 		idCurso = params[:course_id]
 		curso = Course.find(idCurso)
 		respuestas = []
 		curso.evaluation.each do |e|
   			e.question.each do |q|
-   				 ans = q.answer.where(user_id: user.id).last
+   				 ans = q.answer.where(user_id: @user.id).last
    				 if not ans.nil?
    				 	if not respuestas.include? ans
    				 		respuestas << ans 
@@ -45,25 +48,21 @@ class CoursesController < ApplicationController
    				 end
 			end
 		end
-		puts "AAAAAAAAAAAAH"
 		propositos_id = []
 		correcta = []
 		respuestas.each do |respuesta|
 			propositos_id << respuesta.purpose_id
 			correcta << respuesta.correct
 		end
-		pp propositos_id
-		pp correcta
 		repetir = []
 		ids = []
-		hashIdsPropositosCantidad = Hash.new 
+		@hashIdsPropositosCantidad = Hash.new 
 		for i in 0..propositos_id.length-1
 			cantidad = 0 
 			cantidadBuenas = 0
 		    if not repetir.include? propositos_id[i]
 				repetir << propositos_id[i]
 				cantidad = propositos_id.count(propositos_id[i])
-				puts "cantidad #{cantidad}"
 				for j in 0..propositos_id.length-1
 					if propositos_id[i] == propositos_id[j]
 						if correcta[j]
@@ -72,9 +71,13 @@ class CoursesController < ApplicationController
 					end 
 				end
 			end
-			hashIdsPropositosCantidad[propositos_id]=[cantidad,cantidadBuenas]
+			@hashIdsPropositosCantidad[propositos_id]=[cantidad,cantidadBuenas]
 		end
-		pp hashIdsPropositosCantidad
+		@propositos = []
+		@hashIdsPropositosCantidad.each do |key, value|
+			@propositos << Purpose.find(key)
+		end
+		pp @propositos.class
 =begin
 		evaluaciones = curso.evaluation
 		questions_id = []

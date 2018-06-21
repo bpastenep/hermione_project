@@ -182,13 +182,6 @@ class EvaluationsController < ApplicationController
           end
           puts "Grupos #{grupos}"
           User.asignarGrupo(grupos)
-          # I1 I4 I7 Las columnas definen el grupo 
-          # I2 I5 I8
-          # I3 I6 I9
-          #Crear matriz cantidad de filas cantidadGrupos, columnas cantidad de intengrantes. 
-          #llenar matriz primero en columnas con los integrantes que respondieron bien 
-          #Llenar matriz por fila con el resto de los integrantes. 
-          # asignarColor (matriz)
         else
             puts "No se pueden crear grupos, no cumple con la cantidad minima"    
         end
