@@ -77,58 +77,19 @@ class CoursesController < ApplicationController
 		@hashIdsPropositosCantidad.each do |key, value|
 			@propositos << Purpose.find(key)
 		end
-		pp @propositos.class
-=begin
-		evaluaciones = curso.evaluation
-		questions_id = []
-		evaluations_id = []
-		respuestas = []
-		evaluaciones.each do |evaluacion|
-			questions_id << evaluacion.question.ids
-			evaluation_id << evaluacion.id
-		end
-		#El siguiente bloque de codigo genera un array con todas las respuestas (Answer model) que ha dado el usuario para el curso seleccionado. 
-		evaluation_id.each do |id_eval|
-			questions_id.each do |arrayIdsQuestion|
-				arrayIdsQuestion.each do |question_id|
-					respuestas << Answer.where(evaluation_id: id_eval, user_id: user.id, question_id: question_id).last
-				end
-			end
-		end
-		arrayFinal = []  
-		respuestas.each do |respuesta|
-			pregunta = Question.where(question_id: respuesta.question_id).last
-			proposito = pregunta.purpose 
-			arrayFinal << [proposito.id, respuesta.correct]
-		end
-		@conteoPropositos = Hash.new
-		@respuestaPropositos = Hash.new
-		contadorTotal = 0 
-		contadorAlumno = 0
-		arrayFinal.each do |arrayPropositos|
-			@conteoPropositos[arrayPropositos[0]] = 0
-			@respuestaPropositos[arrayPropositos[0]] = 0
-		end
-		# hash[id_proposito] = cantidad 
-		arrayFinal.each do |arrayPropositos|
-			@conteoPropositos[arrayPropositos[0]] = @conteoPropositos[arrayPropositos[0]] + 1
-			if arrayPropositos[1]
-				@respuestaPropositos[arrayPropositos[0]] = @espuestaPropositos[arrayPropositos[0]] + 1
-			end 
-		end
-=end
 	end
 
-=begin
+
 	def crearReporteCurso
-		id_curso = params[:id_curso]
+		id_curso = params[:course_id]
 		curso = Course.find(id_curso)
 		alumnos = curso.user
+		pp alumnos
 		evaluaciones = curso.evaluation
-
+		azul = []
 		alumnos.each do |alumno| 
-
-		
+			azul << Course.crearReportePorAlumno(alumno.rut,curso.id)
+		end
+		pp azul
 	end
-=end 
 end

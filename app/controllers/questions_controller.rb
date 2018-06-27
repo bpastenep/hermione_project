@@ -26,8 +26,6 @@ class QuestionsController < ApplicationController
   # POST /questions.json
   def create
     @question = Question.new(question_params)
-    #De aca en adelante es para lograr insertar datos en la tabla intermedia 
-    #La Tabla intermedia se lla purpose_question
     respond_to do |format|
       if @question.save
           proposito = Purpose.where(id: params[:question][:proposito]).first

@@ -25,6 +25,10 @@ Rails.application.routes.draw do
   get 'reports' => 'home#reports', as: :reports
   post 'crearReporteAlumno' => 'courses#crearReporteAlumno', as: :crearReporteAlumno
   post 'datosReporteAlumno' => 'home#datosReporteAlumno', as: :datosReporteAlumno
+  post 'datosReporteCurso' => 'home#datosReporteCurso', as: :datosReporteCurso
+  get 'evaluationInSitu' => 'evaluations#evaluationInSitu', as: :evaluationInSitu
+  post 'activequestioninsitu' => 'evaluations#activequestioninsitu', as: :activequestioninsitu
+  post 'crearReporteCurso' => 'courses#crearReporteCurso', as: :crearReporteCurso
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

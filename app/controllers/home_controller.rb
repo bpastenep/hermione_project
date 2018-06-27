@@ -17,7 +17,10 @@ class HomeController < ApplicationController
 
 
   def datosReporteAlumno
-    puts "Entre a verificar los datos del reporte"
+    @courses = Course.all
+  end
+
+    def datosReporteCurso
     @courses = Course.all
   end
 end

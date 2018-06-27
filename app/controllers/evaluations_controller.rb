@@ -16,10 +16,23 @@ class EvaluationsController < ApplicationController
 
   # GET /evaluations/new
   def new
-    @evaluation = Evaluation.new
+    @evaluation = EvaluationTemporal.new
     @question = Question.all
     @courses = Course.all
   end 
+
+  def evaluationInSitu
+    @evaluation = Evaluation.new
+    @question = Question.all
+  end
+
+  def activequestioninsitu
+    questions_id = params[:questions]
+    @questions = []
+    questions_id.each do |questionId|
+      @questions << Question.find(questionId)
+    end
+  end
 
   # GET /evaluations/1/edit
   def edit
@@ -92,6 +105,7 @@ class EvaluationsController < ApplicationController
   end
 
 
+
   #Funcion que permite modficar el estado de una pregunta en la tabla evaluation_question. Cambiando el booleano
   #que existe por cada asociación. 
   def activarpregunta
@@ -107,6 +121,7 @@ class EvaluationsController < ApplicationController
       puts "No se pudo activar la pregunta"
     end
   end
+
 
   def desactivarpregunta
     idEvaluacion =  params[:idEvaluation]

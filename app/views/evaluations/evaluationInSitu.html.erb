@@ -1,0 +1,39 @@
+<div class="container">
+	<% if user_signed_in? %>
+	  <%if current_user.rol=="Profesor"%>
+	  <h1>Nueva evaluación in-situ</h1>
+	    <%= form_tag activequestioninsitu_url do |form| %>
+	      <table>
+	      <tr>
+	      <div class="field">
+	        <td><%= label_tag :objetivo %>
+	        <%= text_area_tag 'objetivo'%></td>
+	      </div>
+	      </tr> 
+	      <div class="field">
+	      <tr>
+	      <td>
+	       <p><h2>Seleccione las preguntas </h2></p> 
+	          <% @question.each do |c| %>
+	          <tr>
+	          <td>
+	              <%= check_box_tag "questions[]", c.id %><%= label_tag(:questions, c.enunciado) %>
+	          </td>
+	        </tr>
+	          <%end%>
+	        
+	        </td>
+	      </tr>
+	      </div>
+	      </table>
+	      <div class="actions">
+	        <%= submit_tag "Activar evaluación" , class: "btn btn-primary"  %>
+	      </div>
+	    <%end%>
+	   <%else%>
+	  <h1><center>No tiene los permisos necesarios.</center></h1>
+	  <%end%>
+	<%else%>
+	  <h1>Debe iniciar sesión</h1>
+	<%end%>
+</div>

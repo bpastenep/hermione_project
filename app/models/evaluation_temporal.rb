@@ -1,0 +1,2 @@
+class EvaluationTemporal < ApplicationRecord
+end

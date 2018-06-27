@@ -2,7 +2,7 @@
   <%if current_user.rol=="Profesor"%>
   <div class="container">
   	<center><h4>¿Qué reportes desea generar?</h4> 
-  		<%= button_to 'Reporte por curso', creargrupo_path , id: "courseReport", remote: true %>
+  		<%= button_to 'Reporte por curso', datosReporteCurso_path , id: "courseReport" %>
   		<%= button_to 'Reporte por alumno', datosReporteAlumno_path , id: "alumnReport" %></center>
   <%else%>
  <h1><center>No tiene los permisos necesarios.</center></h1>
