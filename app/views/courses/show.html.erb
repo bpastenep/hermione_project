@@ -3,7 +3,7 @@
 
 <div class="container">
 	<h3> Curso: </h3>
-	<h4> @curso.descripcion </h4>
+	<h4> <%= @course.descripcion%> </h4>
 
 	<table>
 		<thead>
@@ -13,12 +13,15 @@
 				<th> RUT </th>
 		</thead>
 		<tbody>
-			<%@users.each do |user|%> 
+			<%@user.each do |alumno|%> 
+			<%if not current_user.rut == alumno.rut %>
 			<tr>
-				<td>user.nombreC</td>
-				<td>user.email</td>
-				<td>user.rut</td>
+				<td><%= alumno.nombreC%></td>
+				<td><%= alumno.email%></td>
+				<td><%= alumno.rut%></td>
 			</tr>
+			<%end%>
+			<%end%>
 		</tbody>
 	</table>
 

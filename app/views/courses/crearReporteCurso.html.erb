@@ -1,0 +1,38 @@
+<div class="container">
+  <% if user_signed_in? %>
+    <%if current_user.rol=="Profesor"%>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Rut Alumno </th>
+            <%contador = 1 %>
+            <% @resultadoCurso.each do |rut, hashProposito| %> 
+              <% hashProposito.each do |idProposito,values| %>
+                <% string = "propósito #{contador}"%>
+                <th> <%= link_to string, @propositos[0][contador-1] %>  </th>
+                <%contador = contador + 1 %>
+              <% end %>
+             <%break%>
+            <%end%>
+          </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <% @resultadoCurso.each do |rut, hashProposito| %>
+              <td> <%= rut %></td>
+              <% hashProposito.each do |idProposito,values| %>
+                  <td> <%= (values[1]*100)/values[0]%> %</td>
+              <%end%>
+              <tr>
+            </tr>
+            <%end%>
+        </tr>  
+        </tbody>
+      </table>
+    <%else%>
+    <h1><center>No tiene los permisos necesarios.</center></h1>
+    <%end%>
+  <%else%>
+    <h1>Debe iniciar sesión</h1>
+  <%end%>
+</div>

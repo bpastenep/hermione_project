@@ -4,7 +4,7 @@ class Course < ApplicationRecord
 	has_many :user, through: :course_user, dependent: :destroy
 	belongs_to :program
 
-	def crearReportePorAlumno(rut, course_id)
+	def self.crear_reporte(rut, course_id)
 		rutAlumno = rut
 		user = User.where(rut: rutAlumno).last
 		curso = Course.find(course_id)
@@ -42,7 +42,7 @@ class Course < ApplicationRecord
 					end 
 				end
 			end
-			hashIdsPropositosCantidad[propositos_id]=[cantidad,cantidadBuenas]
+			hashIdsPropositosCantidad[propositos_id[i]]=[cantidad,cantidadBuenas]
 		end
 		return hashIdsPropositosCantidad
 	end

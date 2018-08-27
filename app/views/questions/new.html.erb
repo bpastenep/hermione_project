@@ -48,11 +48,7 @@
 
       <div class="field">
       <b><%= form.label :proposito %><br></b>
-      <%= form.select(:proposito) do %>
-          <% @proposito.each do |c| %>
-            <%= content_tag(:option, c.descripcion, value: c.id) %>
-          <% end %>
-        <% end %>
+      <%= select_tag "proposito", options_from_collection_for_select(@proposito, "id", "descripcion") %> 
     </div>
 
     <div class="actions">

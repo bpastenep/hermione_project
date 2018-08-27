@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   post 'saveanswer' => 'answers#saveanswer', as: :saveanswer
   post 'viewresult' => 'evaluations#viewresult', as: :viewresult
   post 'creargrupo' => 'evaluations#crearGrupo', as: :creargrupo
+  post 'desactivargrupo' => 'evaluations#desactivargrupo', as: :desactivargrupo
   post 'cargarprograma' => 'home#cargarprograma', as: :cargarprograma
   get 'createcourse' => 'courses#createcourse', as: :createcourse
   post 'guardarcurso' => 'courses#guardarcurso', as: :guardarcurso
@@ -29,7 +30,9 @@ Rails.application.routes.draw do
   get 'evaluationInSitu' => 'evaluations#evaluationInSitu', as: :evaluationInSitu
   post 'activequestioninsitu' => 'evaluations#activequestioninsitu', as: :activequestioninsitu
   post 'crearReporteCurso' => 'courses#crearReporteCurso', as: :crearReporteCurso
-  
+  get 'seleccionarParaVer' => 'courses#seleccionarParaVer', as: :seleccionarParaVer
+  post 'show' => 'courses#show', as: :show
+  get 'responderPorGrupo' => 'courses#responderPorGrupo', as: :responderPorGrupo
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
  

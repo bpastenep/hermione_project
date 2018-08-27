@@ -16,13 +16,13 @@ class EvaluationsController < ApplicationController
 
   # GET /evaluations/new
   def new
-    @evaluation = EvaluationTemporal.new
+    @evaluation = Evaluation.new
     @question = Question.all
     @courses = Course.all
   end 
 
   def evaluationInSitu
-    @evaluation = Evaluation.new
+    @evaluation = EvaluationTemporal.new
     @question = Question.all
   end
 
@@ -136,6 +136,10 @@ class EvaluationsController < ApplicationController
     end
   end
 
+  def desactivargrupo
+    puts "entre a desactivargrupo"
+    User.all.update(asignacionGrupo: false)
+  end
 
   #Función encargada de la creación de grupos una vez finalizada una pregunta. 
   def crearGrupo 
@@ -173,10 +177,11 @@ class EvaluationsController < ApplicationController
         d = d+1
       end
     end
-    if userAnswer.length > 6 
+    if userAnswer.length >  6 
       if (cantidadLogrado*100)/ userAnswer.length > 35 && (cantidadLogrado*100)/ userAnswer.length < 75 
         cantidadGrupos = userAnswer.length / cantidadIntegrantes
-        if cantidadGrupos > 2
+        puts cantidadGrupos
+        if cantidadGrupos >= 2
           userAnswer.each do |key, value|
             if value == tmp.correctAlternative
                 userCorrecto << key

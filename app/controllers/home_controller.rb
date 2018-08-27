@@ -17,10 +17,10 @@ class HomeController < ApplicationController
 
 
   def datosReporteAlumno
-    @courses = Course.all
+    @courses = Course.where(program_id: Tmp.last.program_id)
   end
 
     def datosReporteCurso
-    @courses = Course.all
+    @courses = Course.where(program_id: Tmp.last.program_id)
   end
 end

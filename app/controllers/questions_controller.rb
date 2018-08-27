@@ -15,7 +15,8 @@ class QuestionsController < ApplicationController
   # GET /questions/new
   def new
     @question = Question.new
-    @proposito = Purpose.all
+    @proposito = Purpose.all 
+    pp @proposito
   end
 
   # GET /questions/1/edit
@@ -26,15 +27,11 @@ class QuestionsController < ApplicationController
   # POST /questions.json
   def create
     @question = Question.new(question_params)
+    @question.purpose_id = params[:proposito]
+    pp params[:proposito]
     respond_to do |format|
       if @question.save
-          proposito = Purpose.where(id: params[:question][:proposito]).first
-          proposito_id = proposito.id
-          question = Question.last
-          question_id = question.id
-          puts proposito_id
-          puts question_id
-    PurposeQuestion.create(purpose_id: proposito_id, question_id: question_id)
+        pp "entre al save"
         format.html { redirect_to @question, notice: 'Pregunta fue exitosamente creada' }
         format.json { render :show, status: :created, location: @question }
       else
@@ -97,6 +94,7 @@ class QuestionsController < ApplicationController
       respuestas[2]=@resultado.respuesta_incorrecta2
       respuestas[3]=@resultado.respuesta_incorrecta3
       if tmp.flagAlternativas
+        puts "ENNNNTRE A QUE NO SE HAN GUARDADO LAS ALTERNATIVAS"
         @respuestasD = respuestas.shuffle
         puts @respuestasD[0]
         puts @respuestasD[1]
@@ -107,7 +105,7 @@ class QuestionsController < ApplicationController
         @respuestasD[0]= tmp.a
         @respuestasD[1]= tmp.b
         @respuestasD[2]= tmp.c
-        @respuestasD[3]= tmp.a
+        @respuestasD[3]= tmp.d
       end
     end
   end

@@ -19,12 +19,13 @@ class User < ApplicationRecord
       end
     end
 
-  def asignarGrupo(matrizGrupos)
+  def self.asignarGrupo(matrizGrupos)
     contador = 1
     matrizGrupos.each do |arreglosIds|
       arreglosIds.each do |user_id|
         usuario = User.find(user_id)
-        usuario.update(asignacionGrupo: true, grupo:contador)
+        puts "Asignacion de grupo? #{usuario}"
+        usuario.update(asignacionGrupo: true, grupo: contador)
       end
       contador = contador + 1
     end

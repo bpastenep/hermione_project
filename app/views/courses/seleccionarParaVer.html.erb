@@ -1,0 +1,15 @@
+<div class="container">
+<% if user_signed_in? %>
+  <%if current_user.rol=="Profesor"%>
+     <%= form_tag show_url do |form| %>
+		Seleccione el curso a visualizar
+		<%= select_tag "curso_id", options_from_collection_for_select(@course, "id", "descripcion") %> 
+		<%= submit_tag "Visualizar curso", class: 'btn btn-primaty'%>
+				<%end%>
+   <%else%>
+  <h1><center>No tiene los permisos necesarios.</center></h1>
+  <%end%>
+<%else%>
+  <h1>Debe iniciar sesión</h1>
+<%end%>
+</div>

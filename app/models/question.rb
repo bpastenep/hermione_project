@@ -1,5 +1,5 @@
 class Question < ApplicationRecord
-  	belongs_to :purpose, dependent: :destroy
+  	belongs_to :purpose
   	has_many :evaluation_question, dependent: :destroy
   	has_many :question, through: :evaluation_question, dependent: :destroy
   	has_many :answer

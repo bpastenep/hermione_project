@@ -74,7 +74,7 @@
 		}
 		$.ajax({
 			type: 'POST',
-			url: "<%= saveanswer_path %>",
+			url: "<%= saveanswergroups_path %>",
 			data: {question_id: "<%= @resultado.id %>", respuesta: rate_value, user_id:"<%=current_user.id%>", opcion: letra},
 			dataType: 'json',
 			success: function(){
@@ -91,5 +91,4 @@
 <%else%>
   <h1>Debe iniciar sesión</h1>
 <%end%>
-
 

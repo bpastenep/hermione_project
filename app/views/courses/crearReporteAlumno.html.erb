@@ -6,12 +6,10 @@
 		  		<tr>
 		  			<th> </th>
 			  		<%contador = 1 %>
-			  		<% @propositos.each do |propositoArray| %> 
-			  			<% propositoArray.each do |proposito| %>
-			  			<% string = "proposito #{contador}"%>
+			  		<% @propositos.each do |proposito| %> 
+			  				<% string = "proposito #{contador}"%>
 			  				<th id=<%=proposito.id%>><%= link_to string, proposito %> </th>
-			  			<% end %>
-			  			<%contador = contador + 1 %>
+			  				<%contador = contador + 1 %>
 			  		<%end%>
 		  		</tr>
 	  		</thead>

@@ -10,6 +10,7 @@ class PurposesController < ApplicationController
   # GET /purposes/1
   # GET /purposes/1.json
   def show
+    
   end
 
   # GET /purposes/new

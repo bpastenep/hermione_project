@@ -4,17 +4,21 @@
   <%if current_user.rol=="Profesor"%>
 	<p id="notice"><%= notice %></p>
 	<p>
-	  <strong>Descripcion:</strong>
+	  <strong>Descripcion del propósito:</strong>
 	  <%= @purpose.descripcion %>
 	</p>
 
 	<p>
-	  <strong>Rda especific:</strong>
+	  <strong>Rda específico:</strong>
 	  <%= @purpose.rda_especific.descripcion %>
 	</p>
 
-	<%= link_to 'Edit', edit_purpose_path(@purpose) %> |
-	<%= link_to 'Back', purposes_path %>
+	<p>
+	  <strong>Rda general:</strong>
+	  <%= @purpose.rda_especific.rda_general.descripcion %>
+	</p>
+
+	
 	<%else%>
 	  <h1><center>No tiene los permisos necesarios.</center></h1>
    <%end%>

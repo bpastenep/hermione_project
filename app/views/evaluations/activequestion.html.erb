@@ -51,6 +51,7 @@
 				</div>
 				<div class="modal-footer">
 					<button class="btn btn-primary" id="grupoID" > Crear grupos </button>
+					<button class="btn btn-primary" id="desactivargrupoID" > Desactivar Grupos </button>
 				</div>
 			</div>
 		</div>
@@ -88,11 +89,20 @@
 	});
 
 	$("#grupoID").click(function(){
-		console.log("FUUUUUNCIOOONA");
-		console.log(this.value)
 		$.ajax({
 			type: 'POST',
 			url: "<%= creargrupo_path %>",
+			data: {idEvaluation: "<%= @idEvaluation%>", idPregunta: this.value, cantidadIntegrantes: $(inputCantidadIntegrantes).val() },
+			dataType: 'json',
+			success: {status: "ok"}
+		});
+	});
+
+	$("#desactivargrupoID").click(function(){
+		console.log("Funciona el boton");
+		$.ajax({
+			type: 'POST',
+			url: "<%= desactivargrupo_path %>",
 			data: {idEvaluation: "<%= @idEvaluation%>", idPregunta: this.value, cantidadIntegrantes: $(inputCantidadIntegrantes).val() },
 			dataType: 'json',
 			success: {status: "ok"}
